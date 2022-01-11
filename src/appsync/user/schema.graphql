@@ -1,0 +1,36 @@
+schema {
+    mutation: Mutation
+    query: Query
+}
+
+type Mutation {
+    ########################################
+    # record
+    ########################################
+    addRecord(input: RecordMastInput!): RecordMast!
+    ########################################
+    # score
+    ########################################
+    addScore(input: ScoreMastInput!): ScoreMast!
+    ########################################
+    # user
+    ########################################
+    updateUserMast(input: UserMastInput!): UserMast!
+}
+
+type Query {
+    ########################################
+    # record
+    ########################################
+    fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
+    ########################################
+    # score
+    ########################################
+    fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
+    ########################################
+    # user
+    ########################################
+    fetchMyUserMast: UserMast
+    fetchUserMastByUserID(userID: ID!): UserMast
+    fetchAllUserMast: [UserMast!]!
+}

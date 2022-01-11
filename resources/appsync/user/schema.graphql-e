@@ -1,0 +1,102 @@
+
+
+
+
+
+
+
+
+
+enum ErrorCode {
+  chillnnTraining_400_badRequest
+  chillnnTraining_401_notSignIn
+  chillnnTraining_404_resourceNotFound
+  chillnnTraining_500_systemError
+}
+
+type Mutation {
+  addRecord(input: RecordMastInput!): RecordMast!
+  addScore(input: ScoreMastInput!): ScoreMast!
+  updateUserMast(input: UserMastInput!): UserMast!
+}
+
+type Query {
+  fetchAllUserMast: [UserMast!]!
+  fetchMyUserMast: UserMast
+  fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
+  fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
+  fetchUserMastByUserID(userID: ID!): UserMast
+}
+
+type RecordMast {
+  cleanerID: ID!
+  createdAt: AWSTimestamp!
+  finishedAt: AWSTimestamp!
+  recordID: ID!
+  room: String!
+  startAt: AWSTimestamp!
+}
+
+input RecordMastInput {
+  cleanerID: ID!
+  createdAt: AWSTimestamp!
+  finishedAt: AWSTimestamp!
+  recordID: ID!
+  room: String!
+  startAt: AWSTimestamp!
+}
+
+enum Role {
+  cleaner
+  manager
+}
+
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
+  url: AWSURL!
+}
+
+input S3ObjectInput {
+  bucket: String!
+  key: String!
+  region: String!
+  url: AWSURL!
+}
+
+type ScoreMast {
+  createdAt: AWSTimestamp!
+  recordID: ID!
+  score: Int!
+  scoreID: ID!
+  scorerUserID: ID!
+}
+
+input ScoreMastInput {
+  createdAt: AWSTimestamp!
+  recordID: ID!
+  score: Int!
+  scoreID: ID!
+  scorerUserID: ID!
+}
+
+type UserMast {
+  createdAt: AWSTimestamp!
+  email: String!
+  name: String!
+  role: String!
+  updatedAt: AWSTimestamp!
+  userIcon: S3Object
+  userID: ID!
+}
+
+input UserMastInput {
+  createdAt: AWSTimestamp!
+  email: String!
+  name: String!
+  role: String!
+  updatedAt: AWSTimestamp!
+  userIcon: S3ObjectInput
+  userID: ID!
+}

@@ -1,0 +1,88 @@
+service: stage3-server
+variablesResolutionMode: 20210326
+
+provider:
+    name: aws
+    stage: dev
+    region: ap-northeast-1
+    runtime: nodejs14.x
+    lambdaHashingVersion: 20201221
+    iam:
+        role:
+            name: ${self:custom.env.infra.${self:provider.stage}.AWS_SERVICE_ROLE_NAME}
+            statements:
+                - Effect: Allow
+                  Action:
+                      - logs:CreateLogGroup
+                      - logs:CreateLogStream
+                      - logs:PutLogEvents
+                  Resource:
+                      - '*'
+    profile: ${self:custom.env.infra.${self:provider.stage}.AWS_CLI_PROFILE}
+    logRetentionInDays: 3 # ログは3日まで残す
+
+plugins:
+  - serverless-plugin-git-variables
+  - serverless-appsync-plugin
+  - serverless-plugin-split-stacks
+  - serverless-webpack
+  - serverless-prune-plugin
+
+package:
+  individually: true
+
+functions:
+    - ${file(./resources/lambda/cognito/user.yml)}
+    - ${file(./resources/lambda/controller/user.yml)}
+
+custom:
+    # 環境変数
+    env:
+        # lambdaで使う環境変数
+        app:
+            dev: ${file(./env/app/dev.yml)}
+            # stg: ${file(./env/app/stg.yml)}
+            # prd: ${file(./env/app/prd.yml)}
+        # Deploy時に使う環境変数
+        infra:
+            dev: ${file(./env/infra/dev.yml)}
+            # stg: ${file(./env/infra/stg.yml)}
+            # prd: ${file(./env/infra/prd.yml)}
+    # lambdaの過去version管理
+    prune:
+        automatic: true
+        number: 3
+    # lambdaのbundle設定
+    webpack:
+        webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+        includeModules: # Node modules configuration for packaging
+            packagePath: './package.json'
+        excludeFiles: src/**/*.(test|spec).ts
+        packager: 'yarn' # Packager that will be used to package your external modules
+    # AppSyncの定義ファイル
+    appSync:
+        - ${file(./resources/appsync/user/appsync.yml)}
+    # gitの変数をlambdaの環境変数に反映しない
+    exportGitVariables: false
+
+resources:
+    # cloudfront
+    - ${file(./resources/cloudfront/staticAssets.yml)}
+
+    # cognito
+    - ${file(./resources/cognito/user.yml)}
+
+    # dynamodb
+    - ${file(./resources/dynamodb/master.yml)}
+
+    # role
+    ## appsync
+    - ${file(./resources/role/appsync/user.yml)}
+    ## cognito
+    - ${file(./resources/role/cognito/user.yml)}
+    ## lambda
+    - ${file(./resources/role/lambda/cognito.yml)}
+    - ${file(./resources/role/lambda/controller.yml)}
+
+    # s3
+    - ${file(./resources/s3/staticAssets.yml)}

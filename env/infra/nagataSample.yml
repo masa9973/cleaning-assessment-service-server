@@ -1,0 +1,70 @@
+# 永田の環境で作った例です
+#######################################
+#
+# インフラで利用する環境変数のtemplate
+#
+#######################################
+#######################################
+# settings
+#######################################
+AWS_CLI_PROFILE: 'stingy' # ← !!! 自分の開発環境のAWS CLIのProfile名を入力しよう
+AWS_SERVICE_ROLE_NAME: chillnn-training-role-${self:provider.stage}
+#######################################
+# AppSync
+#######################################
+APPSYNC_NAME: chillnn-training-user-${self:provider.stage}
+#######################################
+# cloud front
+#######################################
+CLOUD_FRONT_STATIC_CACHE_POLICY_NAME: chillnn-training-cloudfront-static-cache-policy-${self:provider.stage}
+CLOUD_FRONT_ACTIVE_CACHE_POLICY_NAME: chillnn-training-cloudfront-active-cache-policy-${self:provider.stage}
+CLOUD_FRONT_ALIAS_NAME: '${self:provider.stage}-assets.chillnn-training.stingy.ch' # ← !!! 自分でドメインを取る必要がある
+CLOUD_FRONT_ALIAS_ACM_ARN: 'arn:aws:acm:us-east-1:334547292678:certificate/04e44d94-0eb7-4d7f-ad58-fc5c9fbd1ef7' # ← !!! 自分でACMから証明書を発行する必要がある
+CLOUD_FRONT_S3_STATIC_ASSETS_ORIGIN_ID: S3_STATIC_ASSETS_ORIGIN_ID
+#######################################
+# Cognito
+#######################################
+COGNITO_USER_USER_POOL_NAME: chillnn-training-user-cognito-userPool-${self:provider.stage}
+COGNITO_USER_USER_POOL_CLIENT_NAME: chillnn-training-user-cognito-userPoolClient-${self:provider.stage}
+COGNITO_USER_IDENTITY_POOL_NAME: '${self:provider.stage} chillnn training user'
+#######################################
+# DynamoDB
+#######################################
+DYNAMODB_MASTER_TABLE_NAME: chillnn-training-master-table-${self:provider.stage}
+DYNAMODB_MASTER_TABLE_UUID_INDEX_NAME: uuidIndex
+#######################################
+# Lambda
+#######################################
+LAMBDA_USER_COGNITO_NAME: chillnn-training-user-cognito-${self:provider.stage}
+LAMBDA_USER_CONTROLLER_NAME: chillnn-training-user-controller-${self:provider.stage}
+#######################################
+# Roles
+#######################################
+# AppSync role
+APPSYNC_USER_DYNAMO_ROLE_NAME: chillnn-training-appsync-user-dynamo-role-${self:provider.stage}
+APPSYNC_USER_DYNAMO_POLICY_NAME: chillnn-training-appsync-user-dynamo-role-${self:provider.stage}
+APPSYNC_USER_LAMBDA_ROLE_NAME: chillnn-training-appsync-user-lambda-role-${self:provider.stage}
+APPSYNC_USER_LAMBDA_POLICY_NAME: chillnn-training-appsync-user-lambda-role-${self:provider.stage}
+APPSYNC_USER_LOG_ROLE_NAME: chillnn-training-appsync-user-log-role-${self:provider.stage}
+APPSYNC_USER_LOG_POLICY_NAME: chillnn-training-appsync-user-log-role-${self:provider.stage}
+# Cognito role
+COGNITO_USER_AUTHORIZED_ROLE_NAME: chillnn-training-cognito-user-authorized-role-${self:provider.stage}
+COGNITO_USER_AUTHORIZED_POLICY_NAME: chillnn-training-cognito-user-authorized-policy-${self:provider.stage}
+COGNITO_USER_UnAUTHORIZED_ROLE_NAME: chillnn-training-cognito-user-unauthorized-role-${self:provider.stage}
+COGNITO_USER_UnAUTHORIZED_POLICY_NAME: chillnn-training-cognito-user-unauthorized-policy-${self:provider.stage}
+# Lambda role
+## user cognito
+LAMBDA_USER_COGNITO_ROLE_NAME: chillnn-training-lambda-cognito-role-${self:provider.stage}
+LAMBDA_USER_COGNITO_POLICY_NAME_S3: chillnn-training-lambda-cognito-policy-${self:provider.stage}-s3
+LAMBDA_USER_COGNITO_POLICY_NAME_DYNAMODB: chillnn-training-lambda-cognito-policy-${self:provider.stage}-dynamo
+LAMBDA_USER_COGNITO_POLICY_NAME_CONITO: chillnn-training-lambda-cognito-policy-${self:provider.stage}-cognito
+LAMBDA_USER_COGNITO_POLICY_NAME_LOG: chillnn-training-lambda-cognito-policy-${self:provider.stage}-log
+## user controller
+LAMBDA_USER_CONTROLLER_ROLE_NAME: chillnn-training-lambda-controller-role-${self:provider.stage}
+LAMBDA_USER_CONTROLLER_POLICY_NAME_S3: chillnn-training-lambda-controller-policy-${self:provider.stage}-s3
+LAMBDA_USER_CONTROLLER_POLICY_NAME_DYNAMODB: chillnn-training-lambda-controller-policy-${self:provider.stage}-dynamo
+LAMBDA_USER_CONTROLLER_POLICY_NAME_LOG: chillnn-training-lambda-controller-policy-${self:provider.stage}-log
+#######################################
+# s3
+#######################################
+S3_STATIC_ASSETS_BUCKET_NAME: chillnn-training-static-asset-${self:provider.stage} # ← !!! バケット名は世界でユニークである必要がある。自分で名前をつけてみましょう

@@ -1,0 +1,70 @@
+# 石川の環境で作った例です
+#######################################
+#
+# インフラで利用する環境変数のtemplate
+#
+#######################################
+#######################################
+# settings
+#######################################
+AWS_CLI_PROFILE: 'ishikawa_admin' # ← !!! 自分の開発環境のAWS CLIのProfile名を入力しよう
+AWS_SERVICE_ROLE_NAME: stage3-role-${self:provider.stage}
+#######################################
+# AppSync
+#######################################
+APPSYNC_NAME: stage3-user-${self:provider.stage}
+#######################################
+# cloud front
+#######################################
+CLOUD_FRONT_STATIC_CACHE_POLICY_NAME: stage3-cloudfront-static-cache-policy-${self:provider.stage}
+CLOUD_FRONT_ACTIVE_CACHE_POLICY_NAME: stage3-cloudfront-active-cache-policy-${self:provider.stage}
+CLOUD_FRONT_ALIAS_NAME: '${self:provider.stage}-assets.stage3.ishikawam.com' # ← !!! 自分でドメインを取る必要がある
+CLOUD_FRONT_ALIAS_ACM_ARN: 'arn:aws:acm:us-east-1:854688019189:certificate/4d8f186e-45fc-454d-8cd4-744abb996abe' # ← !!! 自分でACMから証明書を発行する必要がある
+CLOUD_FRONT_S3_STATIC_ASSETS_ORIGIN_ID: S3_STATIC_ASSETS_ORIGIN_ID
+#######################################
+# Cognito
+#######################################
+COGNITO_USER_USER_POOL_NAME: stage3-user-cognito-userPool-${self:provider.stage}
+COGNITO_USER_USER_POOL_CLIENT_NAME: stage3-user-cognito-userPoolClient-${self:provider.stage}
+COGNITO_USER_IDENTITY_POOL_NAME: '${self:provider.stage} stage3 user'
+#######################################
+# DynamoDB
+#######################################
+DYNAMODB_MASTER_TABLE_NAME: stage3-master-table-${self:provider.stage}
+DYNAMODB_MASTER_TABLE_UUID_INDEX_NAME: uuidIndex
+#######################################
+# Lambda
+#######################################
+LAMBDA_USER_COGNITO_NAME: stage3-user-cognito-${self:provider.stage}
+LAMBDA_USER_CONTROLLER_NAME: stage3-user-controller-${self:provider.stage}
+#######################################
+# Roles
+#######################################
+# AppSync role
+APPSYNC_USER_DYNAMO_ROLE_NAME: stage3-appsync-user-dynamo-role-${self:provider.stage}
+APPSYNC_USER_DYNAMO_POLICY_NAME: stage3-appsync-user-dynamo-role-${self:provider.stage}
+APPSYNC_USER_LAMBDA_ROLE_NAME: stage3-appsync-user-lambda-role-${self:provider.stage}
+APPSYNC_USER_LAMBDA_POLICY_NAME: stage3-appsync-user-lambda-role-${self:provider.stage}
+APPSYNC_USER_LOG_ROLE_NAME: stage3-appsync-user-log-role-${self:provider.stage}
+APPSYNC_USER_LOG_POLICY_NAME: stage3-appsync-user-log-role-${self:provider.stage}
+# Cognito role
+COGNITO_USER_AUTHORIZED_ROLE_NAME: stage3-cognito-user-authorized-role-${self:provider.stage}
+COGNITO_USER_AUTHORIZED_POLICY_NAME: stage3-cognito-user-authorized-policy-${self:provider.stage}
+COGNITO_USER_UnAUTHORIZED_ROLE_NAME: stage3-cognito-user-unauthorized-role-${self:provider.stage}
+COGNITO_USER_UnAUTHORIZED_POLICY_NAME: stage3-cognito-user-unauthorized-policy-${self:provider.stage}
+# Lambda role
+## user cognito
+LAMBDA_USER_COGNITO_ROLE_NAME: stage3-lambda-cognito-role-${self:provider.stage}
+LAMBDA_USER_COGNITO_POLICY_NAME_S3: stage3-lambda-cognito-policy-${self:provider.stage}-s3
+LAMBDA_USER_COGNITO_POLICY_NAME_DYNAMODB: stage3-lambda-cognito-policy-${self:provider.stage}-dynamo
+LAMBDA_USER_COGNITO_POLICY_NAME_CONITO: stage3-lambda-cognito-policy-${self:provider.stage}-cognito
+LAMBDA_USER_COGNITO_POLICY_NAME_LOG: stage3-lambda-cognito-policy-${self:provider.stage}-log
+## user controller
+LAMBDA_USER_CONTROLLER_ROLE_NAME: stage3-lambda-controller-role-${self:provider.stage}
+LAMBDA_USER_CONTROLLER_POLICY_NAME_S3: stage3-lambda-controller-policy-${self:provider.stage}-s3
+LAMBDA_USER_CONTROLLER_POLICY_NAME_DYNAMODB: stage3-lambda-controller-policy-${self:provider.stage}-dynamo
+LAMBDA_USER_CONTROLLER_POLICY_NAME_LOG: stage3-lambda-controller-policy-${self:provider.stage}-log
+#######################################
+# s3
+#######################################
+S3_STATIC_ASSETS_BUCKET_NAME: stage3-static-asset-${self:provider.stage} # ← !!! バケット名は世界でユニークである必要がある。自分で名前をつけてみましょう

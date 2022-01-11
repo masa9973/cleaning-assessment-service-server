@@ -1,0 +1,16 @@
+# Academyのマスターテーブル
+- type: AMAZON_DYNAMODB
+  name: masterTable
+  description: 'マスターデータのテーブル'
+  config:
+      tableName: { Ref: Stage3MasterTable }
+      serviceRoleArn: { Fn::GetAtt: [UserAppSyncDynamoRole, Arn] }
+      region: ${self:provider.region}
+# Academyのマスターテーブル
+- type: AWS_LAMBDA
+  name: controller
+  description: 'コントローラー'
+  config:
+      functionName: userController
+      serviceRoleArn: { Fn::GetAtt: [UserAppSyncLambdaRole, Arn] }
+      region: ${self:provider.region}

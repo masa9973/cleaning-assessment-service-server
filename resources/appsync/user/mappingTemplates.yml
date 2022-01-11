@@ -1,0 +1,56 @@
+##################################################
+#
+#
+# mapping
+#
+#
+##################################################
+##################################################
+# record
+##################################################
+- dataSource: controller
+  type: Mutation
+  field: addRecord
+  request: recordMast/addRecord/req.vtl
+  response: recordMast/addRecord/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchRecordsByCleanerID
+  request: recordMast/fetchRecordsByCleanerID/req.vtl
+  response: recordMast/fetchRecordsByCleanerID/res.vtl
+##################################################
+# score
+##################################################
+- dataSource: controller
+  type: Mutation
+  field: addScore
+  request: scoreMast/addScore/req.vtl
+  response: scoreMast/addScore/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchScoresByRecordID
+  request: scoreMast/fetchScoresByRecordID/req.vtl
+  response: scoreMast/fetchScoresByRecordID/res.vtl
+##################################################
+# user
+##################################################
+- dataSource: controller
+  type: Mutation
+  field: updateUserMast
+  request: userMast/updateUserMast/req.vtl
+  response: userMast/updateUserMast/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchMyUserMast
+  request: userMast/fetchMyUserMast/req.vtl
+  response: userMast/fetchMyUserMast/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchUserMastByUserID
+  request: userMast/fetchUserMastByUserID/req.vtl
+  response: userMast/fetchUserMastByUserID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchAllUserMast
+  request: userMast/fetchAllUserMast/req.vtl
+  response: userMast/fetchAllUserMast/res.vtl

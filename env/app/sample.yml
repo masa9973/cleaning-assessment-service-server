@@ -1,0 +1,10 @@
+#######################################
+#
+# Applicationで利用する環境変数のtemplate
+#
+#######################################
+#######################################
+# DynamoDB
+#######################################
+DYNAMODB_MASTER_TABLE_NAME: ${self:custom.env.infra.${self:provider.stage}.DYNAMODB_MASTER_TABLE_NAME}
+DYNAMODB_MASTER_TABLE_UUID_INDEX_NAME: ${self:custom.env.infra.${self:provider.stage}.DYNAMODB_MASTER_TABLE_UUID_INDEX_NAME}
