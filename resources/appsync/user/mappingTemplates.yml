@@ -18,6 +18,11 @@
   field: fetchRecordsByCleanerID
   request: recordMast/fetchRecordsByCleanerID/req.vtl
   response: recordMast/fetchRecordsByCleanerID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchAllRecords
+  request: recordMast/fetchAllRecords/req.vtl
+  response: recordMast/fetchAllRecords/res.vtl
 ##################################################
 # score
 ##################################################

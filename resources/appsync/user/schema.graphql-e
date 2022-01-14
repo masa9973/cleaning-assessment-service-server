@@ -21,6 +21,7 @@ type Mutation {
 }
 
 type Query {
+  fetchAllRecords: [RecordMast!]!
   fetchAllUserMast: [UserMast!]!
   fetchMyUserMast: UserMast
   fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!

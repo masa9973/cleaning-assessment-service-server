@@ -13,8 +13,6 @@ export class UserCognitoService {
         const userID = input.userName;
         const email = input.request.userAttributes.email;
         const now = new Date().getTime();
-        const role = input.request.userAttributes.role;
-
         try {
             await this.repositoryContainer.userMastRepository.addUserMast({
                 userID,
@@ -23,7 +21,7 @@ export class UserCognitoService {
                 userIcon: null,
                 createdAt: now,
                 updatedAt: now,
-                role,
+                role: 'manager',
             });
         } catch (err) {
             console.error(err);

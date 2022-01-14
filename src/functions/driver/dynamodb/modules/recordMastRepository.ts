@@ -19,17 +19,24 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             },
         });
     }
-    // public async deleteRecord(RecordID: string): Promise<RecordMast> {
-    //     const current = await this.fetchRecordByRecordID(RecordID);
-    //     if (!current) {
-    //         throw new Error('404 resouce not exist');
-    //     }
-    //     return this.deleteItem({
-    //         TableName: this.tableName,
-    //         Key: this.getKey(current),
-    //     });
-    // }
-    public fetchRecordsByCleanerID(userID: string): Promise<RecordMast[]> {
+
+    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName: this.tableName,
+            KeyConditionExpression: '#PK = :PK and begins_with(#SK, :SK)',
+            ExpressionAttributeNames: {
+                '#PK': 'PK',
+                '#SK': 'SK',
+            },
+            ExpressionAttributeValues: {
+                ':PK': 'Record',
+                ':SK': cleanerID
+            },
+        });
+    }
+
+    public fetchAllRecords(): Promise<RecordMast[]> {
+        console.log('dynamoDBfetchAllRecords')
         return this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK',
@@ -37,39 +44,21 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 '#PK': 'PK',
             },
             ExpressionAttributeValues: {
-                ':PK': `Record#${userID}`,
+                ':PK': 'Record'
             },
         });
     }
-    // public async fetchRecordByRecordID(RecordID: string): Promise<RecordMast | null> {
-    //     const res = await this.query({
-    //         TableName: this.tableName,
-    //         IndexName: DynamoDBRepositoryBase.UUIDIndexName,
-    //         KeyConditionExpression: '#uuid = :uuid',
-    //         ExpressionAttributeNames: {
-    //             '#uuid': 'uuid',
-    //         },
-    //         ExpressionAttributeValues: {
-    //             ':uuid': RecordID,
-    //         },
-    //     });
-    //     if (res.length) {
-    //         return res[0];
-    //     } else {
-    //         return null;
-    //     }
-    // }
 
     // ================================================
     // keys
     // ================================================
-    protected getPK(recordMast: RecordMast) {
-        return `Record#${recordMast.cleanerID}`;
+    protected getPK(input: RecordMast):string {
+        return `Record`;
     }
-    protected getSK(recordMast: RecordMast) {
-        return `${recordMast.createdAt}#${recordMast.recordID}`;
+    protected getSK(input: RecordMast):string {
+        return `${input.cleanerID}#${input.createdAt}`;
     }
-    protected getUUID(recordMast: RecordMast) {
-        return `${recordMast.recordID}`;
+    protected getUUID(input: RecordMast):string {
+        return `${input.recordID}`;
     }
 }

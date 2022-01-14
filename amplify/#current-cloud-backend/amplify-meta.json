@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-stage3front-dev-101157-authRole",
+      "UnauthRoleArn": "arn:aws:iam::854688019189:role/amplify-stage3front-dev-101157-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::854688019189:role/amplify-stage3front-dev-101157-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-stage3front-dev-101157-deployment",
+      "UnauthRoleName": "amplify-stage3front-dev-101157-unauthRole",
+      "StackName": "amplify-stage3front-dev-101157",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:854688019189:stack/amplify-stage3front-dev-101157/7b248ea0-727b-11ec-aba2-0e1e37c127d3",
+      "AmplifyAppId": "d1tsi174gwcdzi"
+    }
+  }
+}
