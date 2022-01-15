@@ -20,7 +20,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
-    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
+    public fetchRecordsByCleanerID(userID: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK and begins_with(#SK, :SK)',
@@ -30,7 +30,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             },
             ExpressionAttributeValues: {
                 ':PK': 'Record',
-                ':SK': cleanerID
+                ':SK': userID
             },
         });
     }

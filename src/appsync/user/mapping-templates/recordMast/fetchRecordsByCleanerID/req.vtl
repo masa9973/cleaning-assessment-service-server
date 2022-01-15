@@ -2,9 +2,7 @@
     "version": "2018-05-29",
     "operation": "Query",
     "query": {
-        "expression": "PK = :PK",
-        "expressionValues": {
-            ":PK": $util.dynamodb.toDynamoDBJson("Record#${ctx.args.userID}")
-        }
-    },
+        "expression": "#PK = :PK and begins_with(#SK, :SK)",
+        "expressionNames": {"#PK": "PK", "#SK": "SK"},
+        "expressionValues": {":PK": $util.dynamodb.toDynamoDBJson("Record"), ":SK": $util.dynamodb.toDynamoDBJson("${ctx.args.userID}")}}
 }
