@@ -33,6 +33,7 @@ type RecordMast {
   cleanerID: ID!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
+  ifScored: Boolean
   recordID: ID!
   room: String!
   startAt: AWSTimestamp!
@@ -42,6 +43,7 @@ input RecordMastInput {
   cleanerID: ID!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
+  ifScored: Boolean
   recordID: ID!
   room: String!
   startAt: AWSTimestamp!
