@@ -6,6 +6,7 @@ import { ChillnnTrainingError, ErrorCode } from 'stage3-abr';
 type UserAction =
     // record
     | 'AddRecord'
+    | 'UpdateRecord'
     // score
     | 'AddScore'
     // user
@@ -27,6 +28,9 @@ export const handler: Handler = async (
             // ==================================================
             case 'AddRecord':
                 response = await repositoryContainer.recordMastRepository.addRecord(event.input);
+                break;
+            case 'UpdateRecord':
+                response = await repositoryContainer.recordMastRepository.updateRecordMast(event.input);
                 break;
             // ==================================================
             // User

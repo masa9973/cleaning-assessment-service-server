@@ -8,6 +8,7 @@ type Mutation {
     # record
     ########################################
     addRecord(input: RecordMastInput!): RecordMast!
+    updateRecord(input: RecordMastInput!): RecordMast!
     ########################################
     # score
     ########################################

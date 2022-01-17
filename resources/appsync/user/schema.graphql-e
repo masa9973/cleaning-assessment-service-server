@@ -17,6 +17,7 @@ enum ErrorCode {
 type Mutation {
   addRecord(input: RecordMastInput!): RecordMast!
   addScore(input: ScoreMastInput!): ScoreMast!
+  updateRecord(input: RecordMastInput!): RecordMast!
   updateUserMast(input: UserMastInput!): UserMast!
 }
 
@@ -31,9 +32,10 @@ type Query {
 
 type RecordMast {
   cleanerID: ID!
+  cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
-  ifScored: Boolean
+  ifScored: Boolean!
   recordID: ID!
   room: String!
   startAt: AWSTimestamp!
@@ -41,9 +43,10 @@ type RecordMast {
 
 input RecordMastInput {
   cleanerID: ID!
+  cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
-  ifScored: Boolean
+  ifScored: Boolean!
   recordID: ID!
   room: String!
   startAt: AWSTimestamp!

@@ -20,6 +20,23 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
+    public updateRecordMast(input: RecordMast): Promise<RecordMast> {
+        return this.putItem({
+            TableName: this.tableName,
+            Item: {
+                PK: this.getPK(input),
+                SK: this.getSK(input),
+                uuid: this.getUUID(input),
+                ...input,
+            },
+            ConditionExpression: 'attribute_exists(#PK) AND attribute_exists(#SK)',
+            ExpressionAttributeNames: {
+                '#PK': 'PK',
+                '#SK': 'SK',
+            },
+        });
+    }
+
     public fetchRecordsByCleanerID(userID: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
