@@ -1,7 +1,6 @@
 import { repositoryContainer } from '@/repository';
 import { UserCognitoService } from '@/service/cognito/userService';
 import { CustomMessageTriggerEvent, CustomMessageTriggerHandler } from 'aws-lambda';
-import { CognitoIdentityServiceProvider } from 'aws-sdk';
 
 const userCognitoService = new UserCognitoService(repositoryContainer);
 
