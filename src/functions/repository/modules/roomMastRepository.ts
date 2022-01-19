@@ -1,4 +1,4 @@
 import { DynamoDBRepositoryBase } from '@/driver/dynamodb/dynamoDBRepositoryBase';
-import { DynamoDBRoomMastRepository } from '@/driver/dynamodb/modules/recordMastRepository';
+import { DynamoDBRoomMastRepository } from '@/driver/dynamodb/modules/roomMastRepository';
 
-export const hotelMastRepository = new DynamoDBRoomMastRepository(DynamoDBRepositoryBase.MASTER_TABLE_NAME);
+export const roomMastRepository = new DynamoDBRoomMastRepository(DynamoDBRepositoryBase.MASTER_TABLE_NAME);

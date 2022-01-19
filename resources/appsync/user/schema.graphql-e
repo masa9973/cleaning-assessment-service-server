@@ -14,47 +14,79 @@ enum ErrorCode {
   chillnnTraining_500_systemError
 }
 
+type HotelMast {
+  hotelID: ID!
+  hotelName: String!
+}
+
+input HotelMastInput {
+  hotelID: ID!
+  hotelName: String!
+}
+
 type Mutation {
+  addHotel(input: HotelMastInput!): HotelMast!
   addRecord(input: RecordMastInput!): RecordMast!
+  addRoom(input: RoomMastInput!): RoomMast!
   addScore(input: ScoreMastInput!): ScoreMast!
   updateRecord(input: RecordMastInput!): RecordMast!
   updateUserMast(input: UserMastInput!): UserMast!
 }
 
 type Query {
-  fetchAllRecords: [RecordMast!]!
-  fetchAllUserMast: [UserMast!]!
+  fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
+  fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
   fetchMyUserMast: UserMast
   fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
+  fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
+  fetchRoomsByHotelID(hotelID: ID!): [RoomMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }
 
 type RecordMast {
   cleanerID: ID!
+  cleaningRoomID: ID!
   cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
+  hotelID: ID!
   ifScored: Boolean!
   recordID: ID!
-  room: String!
   startAt: AWSTimestamp!
 }
 
 input RecordMastInput {
   cleanerID: ID!
+  cleaningRoomID: ID!
   cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
+  hotelID: ID!
   ifScored: Boolean!
   recordID: ID!
-  room: String!
   startAt: AWSTimestamp!
 }
 
 enum Role {
   cleaner
   manager
+}
+
+type RoomMast {
+  createdAt: AWSTimestamp!
+  hotelID: ID!
+  roomIcon: S3Object
+  roomID: ID!
+  roomName: String!
+}
+
+input RoomMastInput {
+  createdAt: AWSTimestamp!
+  hotelID: ID!
+  roomIcon: S3ObjectInput
+  roomID: ID!
+  roomName: String!
 }
 
 type S3Object {
@@ -90,6 +122,7 @@ input ScoreMastInput {
 type UserMast {
   createdAt: AWSTimestamp!
   email: String!
+  hotelID: ID!
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
@@ -100,6 +133,7 @@ type UserMast {
 input UserMastInput {
   createdAt: AWSTimestamp!
   email: String!
+  hotelID: ID!
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
