@@ -10,7 +10,11 @@ type UserAction =
     // score
     | 'AddScore'
     // user
-    | 'UpdateUserMast';
+    | 'UpdateUserMast'
+    // hotel
+    | 'AddHotel'
+    // room
+    | 'AddRoom'
 
 export const handler: Handler = async (
     //
@@ -40,7 +44,7 @@ export const handler: Handler = async (
                 break;
             // ==================================================
             // Score
-            //===================================================
+            // ==================================================
             case 'AddScore':
                 if (event.userID === event.input.scorerUserID) {
                     response = await repositoryContainer.scoreMastRepository.addScore(event.input);
@@ -48,6 +52,17 @@ export const handler: Handler = async (
                     throw new ChillnnTrainingError(ErrorCode.chillnnTraining_400_badRequest);
                 }
                 break;
+            // ==================================================
+            // Hotel
+            // ==================================================
+            case 'AddHotel':
+                response = await repositoryContainer.hotelMastRepository.addHotel(event.input);
+                break;
+            // ==================================================
+            // Room
+            // ==================================================
+            case 'AddRoom':
+                response = await repositoryContainer.roomMastRepository.addRoom(event.input);
         }
     } catch (err) {
         console.error(err);

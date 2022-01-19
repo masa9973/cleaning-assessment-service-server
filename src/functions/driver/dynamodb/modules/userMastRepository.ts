@@ -58,7 +58,7 @@ export class DynamoDBUserMastRepository extends DynamoDBRepositoryBase<UserMast>
         }
     }
 
-    public fetchAllUser(): Promise<UserMast[]> {
+    public fetchAllUserByHotelID(hotelID: string): Promise<UserMast[]> {
         return this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK',
@@ -66,7 +66,7 @@ export class DynamoDBUserMastRepository extends DynamoDBRepositoryBase<UserMast>
                 '#PK': 'PK',
             },
             ExpressionAttributeValues: {
-                ':PK': 'User',
+                ':PK': `User#${hotelID}`,
             },
         });
     }
@@ -75,7 +75,7 @@ export class DynamoDBUserMastRepository extends DynamoDBRepositoryBase<UserMast>
     // keys
     // ================================================
     protected getPK(input: UserMast): string {
-        return `User`;
+        return `User#${input.hotelID}`;
     }
     protected getSK(input: UserMast): string {
         return `${input.createdAt}#${input.userID}`;

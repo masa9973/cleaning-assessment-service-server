@@ -37,7 +37,35 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
-    public fetchRecordsByCleanerID(userID: string): Promise<RecordMast[]> {
+    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName: this.tableName,
+            KeyConditionExpression: '#indexKey = :indexValue',
+            ExpressionAttributeNames: {
+                "#indexKey"  : 'cleanerID' // GSIの作成時に指定したキー名を設定
+            },
+            ExpressionAttributeValues: {
+                ':indexValue': cleanerID
+            },
+        });
+    }
+
+    // GSI機能してるかわからん
+    public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName : this.tableName,
+            IndexName: 'cleaningRoomID-index',
+            KeyConditionExpression: '#indexKey = :indexValue',
+            ExpressionAttributeNames : {
+                "#indexKey"  : 'cleaningRoomID' // GSIの作成時に指定したキー名を設定
+            },
+            ExpressionAttributeValues: {
+                ':indexValue': cleaningRoomID
+            },
+        });
+    }
+
+    public fetchAllRecordsByHotelID(hotelID: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK and begins_with(#SK, :SK)',
@@ -46,22 +74,8 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 '#SK': 'SK',
             },
             ExpressionAttributeValues: {
-                ':PK': 'Record',
-                ':SK': userID
-            },
-        });
-    }
-
-    public fetchAllRecords(): Promise<RecordMast[]> {
-        console.log('dynamoDBfetchAllRecords')
-        return this.query({
-            TableName: this.tableName,
-            KeyConditionExpression: '#PK = :PK',
-            ExpressionAttributeNames: {
-                '#PK': 'PK',
-            },
-            ExpressionAttributeValues: {
-                ':PK': 'Record'
+                ':PK': `Record`,
+                ':SK': hotelID
             },
         });
     }
@@ -73,7 +87,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         return `Record`;
     }
     protected getSK(input: RecordMast):string {
-        return `${input.cleanerID}#${input.createdAt}`;
+        return `${input.hotelID}#${input.createdAt}`;
     }
     protected getUUID(input: RecordMast):string {
         return `${input.recordID}`;
