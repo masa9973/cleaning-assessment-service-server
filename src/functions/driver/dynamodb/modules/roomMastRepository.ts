@@ -19,7 +19,7 @@ export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast>
         });
     }
     
-    public fetchRoomsByHotelID(hotelID: string): Promise<RoomMast[]> {
+    public fetchRoomsByHotelID(roomHotelID: string): Promise<RoomMast[]> {
         return this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK',
@@ -27,7 +27,7 @@ export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast>
                 '#PK': 'PK',
             },
             ExpressionAttributeValues: {
-                ':PK': `Room#${hotelID}`
+                ':PK': `Room#${roomHotelID}`
             },
         })
     }
@@ -36,7 +36,7 @@ export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast>
     // keys
     // ================================================
     protected getPK(input: RoomMast):string {
-        return `Room#${input.hotelID}`;
+        return `Room#${input.roomHotelID}`;
     }
     protected getSK(input: RoomMast):string {
         return `${input.roomID}#${input.createdAt}`;

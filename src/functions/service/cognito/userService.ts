@@ -13,7 +13,7 @@ export class UserCognitoService {
         const userID = input.userName;
         const email = input.request.userAttributes.email;
         const now = new Date().getTime();
-        const hotelID = generateUUID()
+        const userHotelID = generateUUID()
         try {
             await this.repositoryContainer.userMastRepository.addUserMast({
                 userID,
@@ -23,12 +23,8 @@ export class UserCognitoService {
                 createdAt: now,
                 updatedAt: now,
                 role: 'manager',
-                hotelID,
+                userHotelID,
             });
-            await this.repositoryContainer.hotelMastRepository.addHotel({
-                hotelID,
-                hotelName: '施設名を設定してください',
-            })
         } catch (err) {
             console.error(err);
             await cognito

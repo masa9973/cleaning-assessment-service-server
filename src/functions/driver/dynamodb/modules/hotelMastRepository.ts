@@ -20,14 +20,32 @@ export class DynamoDBHotelMastRepository extends DynamoDBRepositoryBase<HotelMas
         });
     }
 
+    public async fetchHotelByHotelID(hotelID: string): Promise<HotelMast | null> {
+        const res = await this.query({
+            TableName: this.tableName,
+            KeyConditionExpression: '#PK = :PK',
+            ExpressionAttributeNames: {
+                '#PK': 'PK',
+            },
+            ExpressionAttributeValues: {
+                ':PK': `Hotel#${hotelID}`
+            },
+        })
+        if (res.length) {
+            return res[0];
+        } else {
+            return null;
+        }
+    }
+
     // ================================================
     // keys
     // ================================================
     protected getPK(input: HotelMast): string {
-        return `Hotel`;
+        return `Hotel${input.hotelID}`;
     }
     protected getSK(input: HotelMast): string {
-        return `${input.hotelID}`
+        throw new Error('Method not implemented.');
     }
     protected getUUID(input: HotelMast): string {
         throw new Error('Method not implemented.');
