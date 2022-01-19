@@ -20,7 +20,7 @@ export class DynamoDBHotelMastRepository extends DynamoDBRepositoryBase<HotelMas
         });
     }
 
-    public async fetchHotelByHotelID(hotelID: string): Promise<HotelMast | null> {
+    public async fetchHotelByHotelID(hotelID: string): Promise<HotelMast> {
         const res = await this.query({
             TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK',
@@ -31,11 +31,7 @@ export class DynamoDBHotelMastRepository extends DynamoDBRepositoryBase<HotelMas
                 ':PK': `Hotel#${hotelID}`
             },
         })
-        if (res.length) {
-            return res[0];
-        } else {
-            return null;
-        }
+        return res[0];
     }
 
     // ================================================
