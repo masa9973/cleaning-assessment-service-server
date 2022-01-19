@@ -1,8 +1,9 @@
 {
     "version": "2018-05-29",
     "operation": "Query",
+    "index": "cleanerID-index",
     "query": {
-        "expression": "#PK = :PK and begins_with(#SK, :SK)",
-        "expressionNames": {"#PK": "PK", "#SK": "SK"},
-        "expressionValues": {":PK": $util.dynamodb.toDynamoDBJson("Record"), ":SK": $util.dynamodb.toDynamoDBJson("${ctx.args.userID}")}}
+        "expression": "#indexKey = :indexValue",
+        "expressionNames": {"#indexKey": "cleanerID"},
+        "expressionValues": {":PK": $util.dynamodb.toDynamoDBJson("${ctx.args.cleanerID}")}}
 }

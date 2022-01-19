@@ -1,0 +1,11 @@
+{
+    "version": "2018-05-29",
+    "operation": "Query",
+    "query": {
+        "expression": "PK = :PK",
+        "expressionValues": {
+            ":PK": $util.dynamodb.toDynamoDBJson("Room#${hotelID}"),
+        }
+    },
+  
+}

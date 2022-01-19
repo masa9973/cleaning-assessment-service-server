@@ -40,9 +40,10 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
     public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
+            IndexName: 'cleanerID-index',
             KeyConditionExpression: '#indexKey = :indexValue',
             ExpressionAttributeNames: {
-                "#indexKey"  : 'cleanerID' // GSIの作成時に指定したキー名を設定
+                '#indexKey' : 'cleanerID' // GSIの作成時に指定したキー名を設定
             },
             ExpressionAttributeValues: {
                 ':indexValue': cleanerID
@@ -57,7 +58,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             IndexName: 'cleaningRoomID-index',
             KeyConditionExpression: '#indexKey = :indexValue',
             ExpressionAttributeNames : {
-                "#indexKey"  : 'cleaningRoomID' // GSIの作成時に指定したキー名を設定
+                '#indexKey' : 'cleaningRoomID' // GSIの作成時に指定したキー名を設定
             },
             ExpressionAttributeValues: {
                 ':indexValue': cleaningRoomID
