@@ -6,6 +6,14 @@
 #
 ##################################################
 ##################################################
+# hotel
+##################################################
+- dataSaurce: controller
+  type: Mutation
+  field: addHotel
+  request: hotelMast/addHotel/req.vtl
+  response: hotelMast/addHotel/res.vtl
+##################################################
 # record
 ##################################################
 - dataSource: controller
@@ -25,9 +33,27 @@
   response: recordMast/fetchRecordsByCleanerID/res.vtl
 - dataSource: masterTable
   type: Query
-  field: fetchAllRecords
-  request: recordMast/fetchAllRecords/req.vtl
-  response: recordMast/fetchAllRecords/res.vtl
+  field: fetchRecordsByRoomID
+  request: recordMast/fetchRecordsByRoomID/req.vtl
+  response: recordMast/fetchRecordsByRoomID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchAllRecordsByHotelID
+  request: recordMast/fetchAllRecordsByHotelID/req.vtl
+  response: recordMast/fetchAllRecordsByHotelID/res.vtl
+##################################################
+# room
+##################################################
+- dataSource: controller
+  type: Mutation
+  field: addRoom
+  request: roomMast/addRoom/req.vtl
+  response: roomMast/addRoom/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchRoomsByHotelID
+  request: roomMast/fetchRoomsByHotelID/req.vtl
+  response: roomMast/fetchRoomsByHotelID/res.vtl
 ##################################################
 # score
 ##################################################
@@ -61,6 +87,6 @@
   response: userMast/fetchUserMastByUserID/res.vtl
 - dataSource: masterTable
   type: Query
-  field: fetchAllUserMast
-  request: userMast/fetchAllUserMast/req.vtl
-  response: userMast/fetchAllUserMast/res.vtl
+  field: fetchAllUserMastByHotelID
+  request: userMast/fetchAllUserMastByHotelID/req.vtl
+  response: userMast/fetchAllUserMastByHotelID/res.vtl
