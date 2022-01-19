@@ -35,13 +35,13 @@ type Query {
     ########################################
     # record
     ########################################
-    fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
+    fetchRecordsByCleanerID(cleanerID: ID!): [RecordMast!]!
     fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
-    fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
+    fetchAllRecordsByHotelID(recordHotelID: ID!): [RecordMast!]!
     ########################################
     # room
     ########################################
-    fetchRoomsByHotelID(hotelID: ID!): [RoomMast!]!
+    fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
     ########################################
     # score
     ########################################
@@ -51,5 +51,5 @@ type Query {
     ########################################
     fetchMyUserMast: UserMast
     fetchUserMastByUserID(userID: ID!): UserMast
-    fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
+    fetchAllUserByHotelID(userHotelID: ID!): [UserMast!]!
 }
