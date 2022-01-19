@@ -36,7 +36,7 @@ type Mutation {
 type Query {
   fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
   fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
-  fetchHotelByHotelID(hotelID: ID!): RecordMast
+  fetchHotelByHotelID(hotelID: ID!): HotelMast
   fetchMyUserMast: UserMast
   fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!

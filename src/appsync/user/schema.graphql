@@ -31,7 +31,7 @@ type Query {
     ########################################
     # hotel
     ########################################
-    fetchHotelByHotelID(hotelID: ID!): RecordMast
+    fetchHotelByHotelID(hotelID: ID!): HotelMast
     ########################################
     # record
     ########################################
