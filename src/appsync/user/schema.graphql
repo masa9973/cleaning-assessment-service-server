@@ -5,10 +5,18 @@ schema {
 
 type Mutation {
     ########################################
+    # hotel
+    ########################################
+    addHotel(input: HotelMastInput!): HotelMast!
+    ########################################
     # record
     ########################################
     addRecord(input: RecordMastInput!): RecordMast!
     updateRecord(input: RecordMastInput!): RecordMast!
+    ########################################
+    # room
+    ########################################
+    addRoom(input: RoomMastInput!): RoomMast!
     ########################################
     # score
     ########################################
@@ -21,10 +29,18 @@ type Mutation {
 
 type Query {
     ########################################
+    # hotel
+    ########################################
+    ########################################
     # record
     ########################################
     fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
-    fetchAllRecords: [RecordMast!]!
+    fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
+    fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
+    ########################################
+    # room
+    ########################################
+    fetchRoomsByHotelID(hotelID: ID!): [RoomMast!]!
     ########################################
     # score
     ########################################
@@ -34,5 +50,5 @@ type Query {
     ########################################
     fetchMyUserMast: UserMast
     fetchUserMastByUserID(userID: ID!): UserMast
-    fetchAllUserMast: [UserMast!]!
+    fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
 }
