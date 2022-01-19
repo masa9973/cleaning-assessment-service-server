@@ -36,6 +36,7 @@ type Mutation {
 type Query {
   fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
   fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
+  fetchHotelByHotelID(hotelID: ID!): RecordMast
   fetchMyUserMast: UserMast
   fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
@@ -50,8 +51,8 @@ type RecordMast {
   cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
-  hotelID: ID!
   ifScored: Boolean!
+  recordHotelID: ID!
   recordID: ID!
   startAt: AWSTimestamp!
 }
@@ -62,8 +63,8 @@ input RecordMastInput {
   cleaningTime: Int!
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
-  hotelID: ID!
   ifScored: Boolean!
+  recordHotelID: ID!
   recordID: ID!
   startAt: AWSTimestamp!
 }
@@ -75,7 +76,7 @@ enum Role {
 
 type RoomMast {
   createdAt: AWSTimestamp!
-  hotelID: ID!
+  roomHotelID: ID!
   roomIcon: S3Object
   roomID: ID!
   roomName: String!
@@ -83,7 +84,7 @@ type RoomMast {
 
 input RoomMastInput {
   createdAt: AWSTimestamp!
-  hotelID: ID!
+  roomHotelID: ID!
   roomIcon: S3ObjectInput
   roomID: ID!
   roomName: String!
@@ -122,10 +123,10 @@ input ScoreMastInput {
 type UserMast {
   createdAt: AWSTimestamp!
   email: String!
-  hotelID: ID!
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
+  userHotelID: ID
   userIcon: S3Object
   userID: ID!
 }
@@ -133,10 +134,10 @@ type UserMast {
 input UserMastInput {
   createdAt: AWSTimestamp!
   email: String!
-  hotelID: ID!
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
+  userHotelID: ID
   userIcon: S3ObjectInput
   userID: ID!
 }

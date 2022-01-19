@@ -13,6 +13,11 @@
   field: addHotel
   request: hotelMast/addHotel/req.vtl
   response: hotelMast/addHotel/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchHotelByHotelID
+  request: hotelMast/fetchHotelByHotelID/req.vtl
+  response: hotelMast/fetchHotelByHotelID/res.vtl
 ##################################################
 # record
 ##################################################
