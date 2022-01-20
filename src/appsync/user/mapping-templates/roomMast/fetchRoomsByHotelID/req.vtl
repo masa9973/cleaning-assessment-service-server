@@ -3,6 +3,9 @@
     "operation": "Query",
     "query": {
         "expression": "PK = :PK",
+        "expressionNames": {
+            "#PK": "PK",
+        },
         "expressionValues": {
             ":PK": $util.dynamodb.toDynamoDBJson("Room#${roomHotelID}"),
         }

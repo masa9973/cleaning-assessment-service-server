@@ -9,7 +9,7 @@
         },
         "expressionValues": {
             ":PK": $util.dynamodb.toDynamoDBJson("Record"),
-            ":SK": $util.dynamodb.toDynamoDBJson("${ctx.args.hotelID}")
+            ":SK": $util.dynamodb.toDynamoDBJson("${ctx.args.recordHotelID}")
         }
     },
   
