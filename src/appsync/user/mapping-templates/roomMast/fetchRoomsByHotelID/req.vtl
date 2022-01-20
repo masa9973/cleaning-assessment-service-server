@@ -7,7 +7,7 @@
             "#PK": "PK",
         },
         "expressionValues": {
-            ":PK": $util.dynamodb.toDynamoDBJson("Room#${roomHotelID}"),
+            ":PK": $util.dynamodb.toDynamoDBJson("Room#${ctx.args.roomHotelID}"),
         }
     },
  
