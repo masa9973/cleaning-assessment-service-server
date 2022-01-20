@@ -2,7 +2,7 @@
     "version": "2018-05-29",
     "operation": "Query",
     "query": {
-        "expression": "PK = :PK",
+        "expression": "#PK = :PK",
         "expressionNames": {
             "#PK": "PK",
         },
@@ -10,5 +10,5 @@
             ":PK": $util.dynamodb.toDynamoDBJson("Room#${roomHotelID}"),
         }
     },
-  
+ 
 }
