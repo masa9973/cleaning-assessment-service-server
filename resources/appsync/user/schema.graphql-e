@@ -34,13 +34,13 @@ type Mutation {
 }
 
 type Query {
-  fetchAllRecordsByHotelID(hotelID: ID!): [RecordMast!]!
-  fetchAllUserByHotelID(hotelID: ID!): [UserMast!]!
+  fetchAllRecordsByHotelID(recordHotelID: ID!): [RecordMast!]!
+  fetchAllUserByHotelID(userHotelID: ID!): [UserMast!]!
   fetchHotelByHotelID(hotelID: ID!): HotelMast
   fetchMyUserMast: UserMast
-  fetchRecordsByCleanerID(userID: ID!): [RecordMast!]!
+  fetchRecordsByCleanerID(cleanerID: ID!): [RecordMast!]!
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
-  fetchRoomsByHotelID(hotelID: ID!): [RoomMast!]!
+  fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }

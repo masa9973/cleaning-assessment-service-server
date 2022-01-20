@@ -8,7 +8,6 @@ export const handler: CustomMessageTriggerHandler = async (event: CustomMessageT
     switch (event.triggerSource) {
         case 'CustomMessage_SignUp':
             // // サインアップ
-            if (event.request.clientMetadata)
             return await userCognitoService.registerService(event);
         case 'CustomMessage_ForgotPassword':
         // return new CognitoForgotPasswordService().passwordReset(event);
