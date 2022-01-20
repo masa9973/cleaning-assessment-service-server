@@ -4,7 +4,7 @@
     "query": {
         "expression": "PK = :PK",
         "expressionValues": {
-            ":PK": $util.dynamodb.toDynamoDBJson("Room#${hotelID}"),
+            ":PK": $util.dynamodb.toDynamoDBJson("Room#${roomHotelID}"),
         }
     },
   
