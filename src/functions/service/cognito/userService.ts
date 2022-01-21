@@ -1,6 +1,6 @@
 import { CustomMessageSignUpTriggerEvent } from 'aws-lambda';
 import AWS from 'aws-sdk';
-import { generateUUID, RepositoryContainer } from 'stage3-abr';
+import { RepositoryContainer } from 'stage3-abr';
 
 const cognito = new AWS.CognitoIdentityServiceProvider({});
 
@@ -13,7 +13,6 @@ export class UserCognitoService {
         const userID = input.userName;
         const email = input.request.userAttributes.email;
         const now = new Date().getTime();
-        const userHotelID = generateUUID()
         try {
             await this.repositoryContainer.userMastRepository.addUserMast({
                 userID,
@@ -23,7 +22,6 @@ export class UserCognitoService {
                 createdAt: now,
                 updatedAt: now,
                 role: 'manager',
-                userHotelID,
             });
         } catch (err) {
             console.error(err);
