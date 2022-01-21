@@ -22,7 +22,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
-    public updateRecordMast(input: RecordMast): Promise<RecordMast> {
+    public updateRecord(input: RecordMast): Promise<RecordMast> {
         return this.putItem({
             TableName: this.tableName,
             Item: {
@@ -72,7 +72,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
 
     public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
         return this.query({
-            TableName : this.tableName,
+            TableName: this.tableName,
             IndexName: 'CleaningRoomID-index',
             KeyConditionExpression: '#CleaningRoomID = :CleaningRoomID',
             ExpressionAttributeNames : {
@@ -82,6 +82,25 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 ':CleaningRoomID': cleaningRoomID
             },
         });
+    }
+
+    public async fetchRecordByRecordID(recordID: string): Promise<RecordMast | null> {
+        const res = await this.query({
+            TableName: this.tableName,
+            IndexName: DynamoDBRepositoryBase.UUIDIndexName,
+            KeyConditionExpression: '#uuid = :uuid',
+            ExpressionAttributeNames: {
+                '#uuid': 'uuid',
+            },
+            ExpressionAttributeValues: {
+                ':uuid': recordID,
+            },
+        });
+        if (res.length) {
+            return res[0]
+        } else {
+            return null
+        }
     }
 
     // ================================================

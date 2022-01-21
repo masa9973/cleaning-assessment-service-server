@@ -34,7 +34,7 @@ export const handler: Handler = async (
                 response = await repositoryContainer.recordMastRepository.addRecord(event.input);
                 break;
             case 'UpdateRecord':
-                response = await repositoryContainer.recordMastRepository.updateRecordMast(event.input);
+                response = await repositoryContainer.recordMastRepository.updateRecord(event.input);
                 break;
             // ==================================================
             // User
