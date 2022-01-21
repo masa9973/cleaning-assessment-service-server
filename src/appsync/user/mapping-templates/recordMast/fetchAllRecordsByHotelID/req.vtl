@@ -4,8 +4,8 @@
     "query": {
         "expression": "#PK = :PK and begins_with(#SK, :SK)",
         "expressionNames": {
-            '#PK': 'PK',
-            '#SK': 'SK',
+            "#PK": "PK",
+            "#SK": "SK",
         },
         "expressionValues": {
             ":PK": $util.dynamodb.toDynamoDBJson("Record"),
