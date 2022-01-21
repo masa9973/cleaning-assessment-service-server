@@ -1,14 +1,14 @@
 {
     "version": "2018-05-29",
     "operation": "Query",
-    "index": "uuidIndex",
+    "index": "CleanerID-index",
     "query": {
-        "expression": "#uuid = :uuid",
+        "expression": "#CleanerID = :CleanerID",
         "expressionNames": {
-            "#uuid": "uuid"
+            "#CleanerID": "CleanerID"
         },
         "expressionValues": {
-            ":uuid": $util.dynamodb.toDynamoDBJson("${ctx.args.cleanerID}"),
+            ":CleanerID": $util.dynamodb.toDynamoDBJson("${ctx.args.cleanerID}"),
         }
     },
 }
