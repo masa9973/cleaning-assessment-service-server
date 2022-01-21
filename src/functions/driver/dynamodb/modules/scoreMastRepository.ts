@@ -5,7 +5,6 @@ import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMast> implements IScoreMastRepository {
     public addScore(input: ScoreMast): Promise<ScoreMast> {
         return this.putItem({
-            // ここでappsyncからのIDは取得できる？→できない。
             TableName: this.tableName,
             Item: {
                 PK: this.getPK(input),
