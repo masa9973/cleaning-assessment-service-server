@@ -46,6 +46,11 @@
   field: fetchAllRecordsByHotelID
   request: recordMast/fetchAllRecordsByHotelID/req.vtl
   response: recordMast/fetchAllRecordsByHotelID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchRecordByRecordID
+  request: recordMast/fetchRecordByRecordID/req.vtl
+  response: recordMast/fetchRecordByRecordID/res.vtl
 ##################################################
 # room
 ##################################################

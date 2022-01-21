@@ -38,6 +38,7 @@ type Query {
     fetchRecordsByCleanerID(cleanerID: ID!): [RecordMast!]!
     fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
     fetchAllRecordsByHotelID(recordHotelID: ID!): [RecordMast!]!
+    fetchRecordByRecordID(recordID: ID!): RecordMast
     ########################################
     # room
     ########################################
