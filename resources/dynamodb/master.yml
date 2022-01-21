@@ -10,12 +10,34 @@ Resources:
                   AttributeType: S
                 - AttributeName: uuid
                   AttributeType: S
+                - AttributeName: CleaningRoomID
+                  AttributeType: S
+                - AttributeName: CleanerID
+                  AttributeType: S
             BillingMode: PROVISIONED
             # ContributorInsightsSpecification:
             GlobalSecondaryIndexes:
                 - IndexName: ${self:custom.env.infra.${self:provider.stage}.DYNAMODB_MASTER_TABLE_UUID_INDEX_NAME}
                   KeySchema:
                       - AttributeName: uuid
+                        KeyType: HASH
+                  Projection:
+                      ProjectionType: ALL
+                  ProvisionedThroughput:
+                      ReadCapacityUnits: 1
+                      WriteCapacityUnits: 1
+                - IndexName: CleaningRoomID-index
+                  KeySchema:
+                      - AttributeName: CleaningRoomID
+                        KeyType: HASH
+                  Projection:
+                      ProjectionType: ALL
+                  ProvisionedThroughput:
+                      ReadCapacityUnits: 1
+                      WriteCapacityUnits: 1
+                - IndexName: CleanerID-index
+                  KeySchema:
+                      - AttributeName: CleanerID
                         KeyType: HASH
                   Projection:
                       ProjectionType: ALL

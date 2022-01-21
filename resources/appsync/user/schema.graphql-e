@@ -126,7 +126,7 @@ type UserMast {
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
-  userHotelID: ID
+  userHotelID: ID!
   userIcon: S3Object
   userID: ID!
 }
@@ -137,7 +137,7 @@ input UserMastInput {
   name: String!
   role: String!
   updatedAt: AWSTimestamp!
-  userHotelID: ID
+  userHotelID: ID!
   userIcon: S3ObjectInput
   userID: ID!
 }

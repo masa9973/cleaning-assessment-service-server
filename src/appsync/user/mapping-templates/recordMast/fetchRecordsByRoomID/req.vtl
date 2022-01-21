@@ -1,9 +1,9 @@
 {
     "version": "2018-05-29",
     "operation": "Query",
-    "index": "cleaningRoomID-index",
+    "index": "CleaningRoomID-index",
     "query": {
-        "expression": "#indexKey = :indexValue",
-        "expressionNames": {"#indexKey": "cleaningRoomID"},
-        "expressionValues": {":indexValue": $util.dynamodb.toDynamoDBJson("${ctx.args.cleaningRoomID}")}}
+        "expression": "#CleaningRoomID = :CleaningRoomID",
+        "expressionNames": {"#CleaningRoomID": "CleaningRoomID"},
+        "expressionValues": {":CleaningRoomID": $util.dynamodb.toDynamoDBJson("${ctx.args.cleaningRoomID}")}}
 }

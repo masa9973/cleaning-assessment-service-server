@@ -10,6 +10,8 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 PK: this.getPK(input),
                 SK: this.getSK(input),
                 uuid: this.getUUID(input),
+                CleaningRoomID: this.getCleaningRoomID(input),
+                CleanerID: this.getCleanerID(input),
                 ...input,
             },
             ConditionExpression: 'attribute_not_exists(#PK) AND attribute_not_exists(#SK)',
@@ -27,41 +29,14 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 PK: this.getPK(input),
                 SK: this.getSK(input),
                 uuid: this.getUUID(input),
+                CleaningRoomID: this.getCleaningRoomID(input),
+                CleanerID: this.getCleanerID(input),
                 ...input,
             },
             ConditionExpression: 'attribute_exists(#PK) AND attribute_exists(#SK)',
             ExpressionAttributeNames: {
                 '#PK': 'PK',
                 '#SK': 'SK',
-            },
-        });
-    }
-
-    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
-        return this.query({
-            TableName: this.tableName,
-            IndexName: 'cleanerID-index',
-            KeyConditionExpression: '#indexKey = :indexValue',
-            ExpressionAttributeNames: {
-                '#indexKey' : 'cleanerID' // GSIの作成時に指定したキー名を設定
-            },
-            ExpressionAttributeValues: {
-                ':indexValue': cleanerID
-            },
-        });
-    }
-
-    // GSI機能してるかわからん
-    public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
-        return this.query({
-            TableName : this.tableName,
-            IndexName: 'cleaningRoomID-index',
-            KeyConditionExpression: '#indexKey = :indexValue',
-            ExpressionAttributeNames : {
-                '#indexKey' : 'cleaningRoomID' // GSIの作成時に指定したキー名を設定
-            },
-            ExpressionAttributeValues: {
-                ':indexValue': cleaningRoomID
             },
         });
     }
@@ -81,6 +56,34 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
+    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName: this.tableName,
+            IndexName: 'CleanerID-index',
+            KeyConditionExpression: '#CleanerID = :CleanerID',
+            ExpressionAttributeNames: {
+                '#CleanerID': 'CleanerID' // GSIの作成時に指定したキー名を設定
+            },
+            ExpressionAttributeValues: {
+                ':CleanerID': cleanerID
+            },
+        });
+    }
+
+    public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName : this.tableName,
+            IndexName: 'CleaningRoomID-index',
+            KeyConditionExpression: '#CleaningRoomID = :CleaningRoomID',
+            ExpressionAttributeNames : {
+                '#CleaningRoomID' : 'CleaningRoomID' // GSIの作成時に指定したキー名を設定
+            },
+            ExpressionAttributeValues: {
+                ':CleaningRoomID': cleaningRoomID
+            },
+        });
+    }
+
     // ================================================
     // keys
     // ================================================
@@ -92,5 +95,11 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
     }
     protected getUUID(input: RecordMast):string {
         return `${input.recordID}`;
+    }
+    protected getCleaningRoomID(input: RecordMast):string {
+        return `${input.cleaningRoomID}`
+    }
+    protected getCleanerID(input: RecordMast):string {
+        return `${input.cleanerID}`
     }
 }
