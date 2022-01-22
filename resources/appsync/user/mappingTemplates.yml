@@ -64,6 +64,11 @@
   field: fetchRoomsByHotelID
   request: roomMast/fetchRoomsByHotelID/req.vtl
   response: roomMast/fetchRoomsByHotelID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchRoomByRoomID
+  request: roomMast/fetchRoomByRoomID/req.vtl
+  response: roomMast/fetchRoomByRoomID/res.vtl
 ##################################################
 # score
 ##################################################

@@ -43,6 +43,7 @@ type Query {
     # room
     ########################################
     fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
+    fetchRoomByRoomID(roomID: ID!): RoomMast
     ########################################
     # score
     ########################################

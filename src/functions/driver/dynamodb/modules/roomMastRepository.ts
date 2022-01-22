@@ -32,6 +32,26 @@ export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast>
         })
     }
 
+    public async fetchRoomByRoomID(roomID: string): Promise<RoomMast | null> {
+        const res = await this.query({
+            TableName: this.tableName,
+            IndexName: DynamoDBRepositoryBase.UUIDIndexName,
+            KeyConditionExpression: '#uuid = :uuid',
+            ExpressionAttributeNames: {
+                '#uuid': 'uuid',
+            },
+            ExpressionAttributeValues: {
+                ':uuid': roomID,
+            },
+        });
+        if (res.length) {
+            return res[0];
+        } else {
+            return null;
+        }
+    }
+    
+
     // ================================================
     // keys
     // ================================================

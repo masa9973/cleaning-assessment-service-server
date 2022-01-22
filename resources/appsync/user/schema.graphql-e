@@ -41,6 +41,7 @@ type Query {
   fetchRecordByRecordID(recordID: ID!): RecordMast
   fetchRecordsByCleanerID(cleanerID: ID!): [RecordMast!]!
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
+  fetchRoomByRoomID(roomID: ID!): RoomMast
   fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
