@@ -29,6 +29,7 @@ type Mutation {
   addRecord(input: RecordMastInput!): RecordMast!
   addRoom(input: RoomMastInput!): RoomMast!
   addScore(input: ScoreMastInput!): ScoreMast!
+  addScoreItem(input: ScoreItemMastInput!): ScoreItemMast!
   updateRecord(input: RecordMastInput!): RecordMast!
   updateUserMast(input: UserMastInput!): UserMast!
 }
@@ -43,6 +44,8 @@ type Query {
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
   fetchRoomByRoomID(roomID: ID!): RoomMast
   fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
+  fetchScoreItemByScoreItemID(scoreItemID: ID!): ScoreItemMast
+  fetchScoreItemsByHotelID(scoreItemHotelID: ID!): [ScoreItemMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }
@@ -106,11 +109,26 @@ input S3ObjectInput {
   url: AWSURL!
 }
 
+type ScoreItemMast {
+  createdAt: AWSTimestamp!
+  scoreItemHotelID: ID!
+  scoreItemID: ID!
+  scoreItemName: ID!
+}
+
+input ScoreItemMastInput {
+  createdAt: AWSTimestamp!
+  scoreItemHotelID: ID!
+  scoreItemID: ID!
+  scoreItemName: ID!
+}
+
 type ScoreMast {
   createdAt: AWSTimestamp!
   recordID: ID!
   score: Int!
   scoreID: ID!
+  scoreItemID: ID!
   scorerUserID: ID!
 }
 
@@ -119,6 +137,7 @@ input ScoreMastInput {
   recordID: ID!
   score: Int!
   scoreID: ID!
+  scoreItemID: ID!
   scorerUserID: ID!
 }
 

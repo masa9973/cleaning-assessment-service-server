@@ -5,6 +5,7 @@ import { userMastRepository } from './modules/userMastRepository';
 import { scoreMastRepository } from './modules/scoreMastRepository';
 import { hotelMastRepository } from './modules/hotelMastRepository';
 import { roomMastRepository } from './modules/roomMastRepository';
+import { scoreItemMastRepository } from './modules/scoreItemMastRepository';
 
 export const repositoryContainer = new RepositoryContainer(
     // infra
@@ -15,4 +16,5 @@ export const repositoryContainer = new RepositoryContainer(
     scoreMastRepository,
     hotelMastRepository,
     roomMastRepository,
+    scoreItemMastRepository
 );

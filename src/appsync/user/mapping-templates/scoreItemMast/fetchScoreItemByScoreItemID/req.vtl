@@ -8,7 +8,7 @@
             "#uuid": "uuid",
         },
         "expressionValues": {
-            ":uuid": $util.dynamodb.toDynamoDBJson("${ctx.args.roomID}"),
+            ":uuid": $util.dynamodb.toDynamoDBJson("${ctx.args.scoreItemID}"),
         }
     },
 }

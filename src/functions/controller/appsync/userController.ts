@@ -15,6 +15,8 @@ type UserAction =
     | 'AddHotel'
     // room
     | 'AddRoom'
+    // scoreItem
+    | 'AddScoreItem'
 
 export const handler: Handler = async (
     //
@@ -59,10 +61,17 @@ export const handler: Handler = async (
                 response = await repositoryContainer.hotelMastRepository.addHotel(event.input);
                 break;
             // ==================================================
+            // ScoreItem
+            // ==================================================
+            case 'AddScoreItem':
+                response = await repositoryContainer.scoreItemMastRepository.addScoreItem(event.input)
+                break;
+            // ==================================================
             // Room
             // ==================================================
             case 'AddRoom':
                 response = await repositoryContainer.roomMastRepository.addRoom(event.input);
+                break;
         }
     } catch (err) {
         console.error(err);

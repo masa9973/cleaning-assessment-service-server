@@ -52,6 +52,24 @@
   request: recordMast/fetchRecordByRecordID/req.vtl
   response: recordMast/fetchRecordByRecordID/res.vtl
 ##################################################
+# scoreItem
+##################################################
+- dataSource: controller
+  type: Mutation
+  field: addScoreItem
+  request: scoreItemMast/addScoreItem/req.vtl
+  response: scoreItemMast/addScoreItem/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchScoreItemsByHotelID
+  request: scoreItemMast/fetchScoreItemsByHotelID/req.vtl
+  response: scoreItemMast/fetchScoreItemsByHotelID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchScoreItemByScoreItemID
+  request: scoreItemMast/fetchScoreItemByScoreItemID/req.vtl
+  response: scoreItemMast/fetchScoreItemByScoreItemID/res.vtl
+##################################################
 # room
 ##################################################
 - dataSource: controller
