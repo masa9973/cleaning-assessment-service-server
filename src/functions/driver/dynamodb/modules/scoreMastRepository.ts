@@ -19,6 +19,24 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
             },
         });
     }
+
+    public updateScore(input: ScoreMast): Promise<ScoreMast> {
+        return this.putItem({
+            TableName: this.tableName,
+            Item: {
+                PK: this.getPK(input),
+                SK: this.getSK(input),
+                uuid: this.getUUID(input),
+                ...input,
+            },
+            ConditionExpression: 'attribute_exists(#PK) AND attribute_exists(#SK)',
+            ExpressionAttributeNames: {
+                '#PK': 'PK',
+                '#SK': 'SK',
+            },
+        });
+    }
+
     public async fetchScoresByRecordID(recordID: string): Promise<ScoreMast[]> {
         return this.query({
             TableName: this.tableName,

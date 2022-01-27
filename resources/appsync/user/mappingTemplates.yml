@@ -105,6 +105,11 @@
   field: addScore
   request: scoreMast/addScore/req.vtl
   response: scoreMast/addScore/res.vtl
+- dataSource: controller
+  type: Mutation
+  field: updateScore
+  request: scoreMast/updateScore/req.vtl
+  response: scoreMast/updateScore/res.vtl
 - dataSource: masterTable
   type: Query
   field: fetchScoresByRecordID

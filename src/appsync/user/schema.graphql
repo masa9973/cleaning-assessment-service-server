@@ -27,6 +27,7 @@ type Mutation {
     # score
     ########################################
     addScore(input: ScoreMastInput!): ScoreMast!
+    updateScore(input: ScoreMastInput!): ScoreMast!
     ########################################
     # user
     ########################################

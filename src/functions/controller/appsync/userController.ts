@@ -9,6 +9,7 @@ type UserAction =
     | 'UpdateRecord'
     // score
     | 'AddScore'
+    | 'UpdateScore'
     // user
     | 'UpdateUserMast'
     // hotel
@@ -55,6 +56,9 @@ export const handler: Handler = async (
                 } else {
                     throw new ChillnnTrainingError(ErrorCode.chillnnTraining_400_badRequest);
                 }
+                break;
+            case 'UpdateScore':
+                response = await repositoryContainer.scoreMastRepository.updateScore(event.input)
                 break;
             // ==================================================
             // Hotel

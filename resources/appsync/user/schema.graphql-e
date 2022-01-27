@@ -33,6 +33,7 @@ type Mutation {
   deleteRoom(roomID: ID!): RoomMast!
   deleteScoreItem(scoreItemID: ID!): ScoreItemMast!
   updateRecord(input: RecordMastInput!): RecordMast!
+  updateScore(input: ScoreMastInput!): ScoreMast!
   updateUserMast(input: UserMastInput!): UserMast!
 }
 
