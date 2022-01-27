@@ -115,6 +115,11 @@
   field: fetchScoresByRecordID
   request: scoreMast/fetchScoresByRecordID/req.vtl
   response: scoreMast/fetchScoresByRecordID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchScoresByScoreItemID
+  request: scoreMast/fetchScoresByScoreItemID/req.vtl
+  response: scoreMast/fetchScoresByScoreItemID/res.vtl
 ##################################################
 # user
 ##################################################

@@ -50,6 +50,7 @@ type Query {
   fetchScoreItemByScoreItemID(scoreItemID: ID!): ScoreItemMast
   fetchScoreItemsByHotelID(scoreItemHotelID: ID!): [ScoreItemMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
+  fetchScoresByScoreItemID(scoreItemID: ID!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }
 

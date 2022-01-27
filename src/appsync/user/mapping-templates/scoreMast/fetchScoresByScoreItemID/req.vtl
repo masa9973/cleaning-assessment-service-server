@@ -1,0 +1,14 @@
+{
+    "version": "2018-05-29",
+    "operation": "Query",
+    "index": "ScoreItemIDIndex",
+    "query": {
+        "expression": "#PK = :PK",
+        "expressionNames": {
+            "#PK": "ScoreItemID"
+        },
+        "expressionValues": {
+            ":PK": $util.dynamodb.toDynamoDBJson("${ctx.args.scoreItemID}"),
+        }
+    },
+}

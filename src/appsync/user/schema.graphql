@@ -60,6 +60,7 @@ type Query {
     # score
     ########################################
     fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
+    fetchScoresByScoreItemID(scoreItemID: ID!): [ScoreMast!]!
     ########################################
     # user
     ########################################

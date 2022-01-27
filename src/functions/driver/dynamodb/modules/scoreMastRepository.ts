@@ -10,6 +10,7 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
                 PK: this.getPK(input),
                 SK: this.getSK(input),
                 uuid: this.getUUID(input),
+                ScoreItemID: this.getScoreItemID(input),
                 ...input,
             },
             ConditionExpression: 'attribute_not_exists(#PK) AND attribute_not_exists(#SK)',
@@ -27,6 +28,7 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
                 PK: this.getPK(input),
                 SK: this.getSK(input),
                 uuid: this.getUUID(input),
+                ScoreItemID: this.getScoreItemID(input),
                 ...input,
             },
             ConditionExpression: 'attribute_exists(#PK) AND attribute_exists(#SK)',
@@ -35,6 +37,20 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
                 '#SK': 'SK',
             },
         });
+    }
+
+    public async fetchScoresByScoreItemID(scoreItemID: string): Promise<ScoreMast[]> {
+        return this.query({
+            TableName: this.tableName,
+            IndexName: 'ScoreItemIDIndex',
+            KeyConditionExpression: '#PK = :PK',
+            ExpressionAttributeNames: {
+                '#PK': 'ScoreItemID'
+            },
+            ExpressionAttributeValues: {
+                ':PK': scoreItemID
+            },
+        })
     }
 
     public async fetchScoresByRecordID(recordID: string): Promise<ScoreMast[]> {
@@ -60,5 +76,8 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
     }
     protected getUUID(scoreMast: ScoreMast) {
         return `${scoreMast.scoreID}`;
+    }
+    protected getScoreItemID(scoreMast: ScoreMast) {
+        return `${scoreMast.scoreItemID}`
     }
 }
