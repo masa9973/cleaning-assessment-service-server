@@ -19,6 +19,17 @@ export class DynamoDBScoreItemMastRepository extends DynamoDBRepositoryBase<Scor
         });
     }
 
+    public async deleteScoreItem(scoreItemID: string): Promise<ScoreItemMast> {
+        const current = await this.fetchScoreItemByScoreItemID(scoreItemID)
+        if (!current) {
+            throw new Error('404 resouce not exist');
+        }
+        return this.deleteItem({
+            TableName: this.tableName,
+            Key: this.getKey(current),
+        });
+    }
+
     public fetchScoreItemsByHotelID(scoreItemHotelID: string): Promise<ScoreItemMast[]> {
         return this.query({
             TableName: this.tableName,

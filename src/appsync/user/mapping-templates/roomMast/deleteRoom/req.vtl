@@ -1,0 +1,9 @@
+{
+    "version": "2018-05-29",
+    "operation": "Invoke",
+    "payload": {
+        "input": $util.toJson($ctx.args), ## controller側で規定した形に合わせている
+        "action": $util.toJson("DeleteRoom"),
+        "userID": $util.toJson($ctx.identity.username)
+    }
+}

@@ -30,6 +30,8 @@ type Mutation {
   addRoom(input: RoomMastInput!): RoomMast!
   addScore(input: ScoreMastInput!): ScoreMast!
   addScoreItem(input: ScoreItemMastInput!): ScoreItemMast!
+  deleteRoom(roomID: ID!): RoomMast!
+  deleteScoreItem(scoreItemID: ID!): ScoreItemMast!
   updateRecord(input: RecordMastInput!): RecordMast!
   updateUserMast(input: UserMastInput!): UserMast!
 }

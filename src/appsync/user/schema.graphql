@@ -17,10 +17,12 @@ type Mutation {
     # scoreItem
     ########################################
     addScoreItem(input: ScoreItemMastInput!): ScoreItemMast!
+    deleteScoreItem(scoreItemID: ID!): ScoreItemMast!
     ########################################
     # room
     ########################################
     addRoom(input: RoomMastInput!): RoomMast!
+    deleteRoom(roomID: ID!): RoomMast!
     ########################################
     # score
     ########################################

@@ -18,6 +18,17 @@ export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast>
             },
         });
     }
+
+    public async deleteRoom(roomID: string): Promise<RoomMast> {
+        const current = await this.fetchRoomByRoomID(roomID)
+        if (!current) {
+            throw new Error('404 resouce not exist')
+        }
+        return this.deleteItem({
+            TableName: this.tableName,
+            Key: this.getKey(current),
+        });
+    }
     
     public fetchRoomsByHotelID(roomHotelID: string): Promise<RoomMast[]> {
         return this.query({

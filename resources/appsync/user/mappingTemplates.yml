@@ -59,6 +59,11 @@
   field: addScoreItem
   request: scoreItemMast/addScoreItem/req.vtl
   response: scoreItemMast/addScoreItem/res.vtl
+- dataSource: controller
+  type: Mutation
+  field: deleteScoreItem
+  request: scoreItemMast/deleteScoreItem/req.vtl
+  response: scoreItemMast/deleteScoreItem/res.vtl
 - dataSource: masterTable
   type: Query
   field: fetchScoreItemsByHotelID
@@ -77,6 +82,11 @@
   field: addRoom
   request: roomMast/addRoom/req.vtl
   response: roomMast/addRoom/res.vtl
+- dataSource: controller
+  type: Mutation
+  field: deleteRoom
+  request: roomMast/deleteRoom/req.vtl
+  response: roomMast/deleteRoom/res.vtl
 - dataSource: masterTable
   type: Query
   field: fetchRoomsByHotelID
