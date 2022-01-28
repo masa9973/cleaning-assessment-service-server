@@ -42,15 +42,15 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
     public async fetchScoresByScoreItemID(scoreItemID: string): Promise<ScoreMast[]> {
         return this.query({
             TableName: this.tableName,
-            IndexName: 'ScoreItemIDIndex',
+            IndexName: 'ScoreItemIDindex',
             KeyConditionExpression: '#PK = :PK',
             ExpressionAttributeNames: {
-                '#PK': 'ScoreItemID'
+                '#PK': 'ScoreItemID',
             },
             ExpressionAttributeValues: {
-                ':PK': scoreItemID
+                ':PK': scoreItemID,
             },
-        })
+        });
     }
 
     public async fetchScoresByRecordID(recordID: string): Promise<ScoreMast[]> {
@@ -78,6 +78,6 @@ export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMas
         return `${scoreMast.scoreID}`;
     }
     protected getScoreItemID(scoreMast: ScoreMast) {
-        return `${scoreMast.scoreItemID}`
+        return `${scoreMast.scoreItemID}`;
     }
 }
