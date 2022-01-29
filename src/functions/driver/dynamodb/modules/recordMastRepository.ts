@@ -44,14 +44,27 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
     public fetchAllRecordsByHotelID(recordHotelID: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
+            KeyConditionExpression: '#PK = :PK',
+            ExpressionAttributeNames: {
+                '#PK': 'PK',
+            },
+            ExpressionAttributeValues: {
+                ':PK': `Record${recordHotelID}`,
+            },
+        });
+    }
+
+    public fetchRecordsByDate(recordHotelID: string, recordDate: string): Promise<RecordMast[]> {
+        return this.query({
+            TableName: this.tableName,
             KeyConditionExpression: '#PK = :PK and begins_with(#SK, :SK)',
             ExpressionAttributeNames: {
                 '#PK': 'PK',
                 '#SK': 'SK',
             },
             ExpressionAttributeValues: {
-                ':PK': `Record`,
-                ':SK': recordHotelID
+                ':PK': `Record${recordHotelID}`,
+                ':SK': recordDate
             },
         });
     }
@@ -107,10 +120,10 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
     // keys
     // ================================================
     protected getPK(input: RecordMast):string {
-        return `Record`;
+        return `Record#${input.recordHotelID}`;
     }
     protected getSK(input: RecordMast):string {
-        return `${input.recordHotelID}#${input.createdAt}`;
+        return `${input.createdAt}#${input.cleaningRoomID}`;
     }
     protected getUUID(input: RecordMast):string {
         return `${input.recordID}`;

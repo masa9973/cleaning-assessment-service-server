@@ -44,6 +44,7 @@ type Query {
   fetchMyUserMast: UserMast
   fetchRecordByRecordID(recordID: ID!): RecordMast
   fetchRecordsByCleanerID(cleanerID: ID!): [RecordMast!]!
+  fetchRecordsByDate(recordDate: String!, recordHotelID: ID!): [RecordMast!]!
   fetchRecordsByRoomID(cleaningRoomID: ID!): [RecordMast!]!
   fetchRoomByRoomID(roomID: ID!): RoomMast
   fetchRoomsByHotelID(roomHotelID: ID!): [RoomMast!]!
@@ -61,6 +62,7 @@ type RecordMast {
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
   ifScored: Boolean!
+  recordDate: String!
   recordHotelID: ID!
   recordID: ID!
   startAt: AWSTimestamp!
@@ -73,6 +75,7 @@ input RecordMastInput {
   createdAt: AWSTimestamp!
   finishedAt: AWSTimestamp!
   ifScored: Boolean!
+  recordDate: String!
   recordHotelID: ID!
   recordID: ID!
   startAt: AWSTimestamp!

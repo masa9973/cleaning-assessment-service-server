@@ -2,14 +2,12 @@
     "version": "2018-05-29",
     "operation": "Query",
     "query": {
-        "expression": "#PK = :PK and begins_with(#SK, :SK)",
+        "expression": "#PK = :PK",
         "expressionNames": {
             "#PK": "PK",
-            "#SK": "SK",
         },
         "expressionValues": {
-            ":PK": $util.dynamodb.toDynamoDBJson("Record"),
-            ":SK": $util.dynamodb.toDynamoDBJson("${ctx.args.recordHotelID}")
+            ":PK": $util.dynamodb.toDynamoDBJson("Record#${ctx.args.recordHotelID}"),
         }
     },
   

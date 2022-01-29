@@ -51,6 +51,11 @@
   field: fetchRecordByRecordID
   request: recordMast/fetchRecordByRecordID/req.vtl
   response: recordMast/fetchRecordByRecordID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchRecordByDate
+  request: recordMast/fetchRecordsByDate/req.vtl
+  response: recordMast/fetchRecordsByDate/res.vtl
 ##################################################
 # scoreItem
 ##################################################
