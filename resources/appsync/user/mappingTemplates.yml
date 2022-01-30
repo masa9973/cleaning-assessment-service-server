@@ -56,6 +56,11 @@
   field: fetchRecordsByDate
   request: recordMast/fetchRecordsByDate/req.vtl
   response: recordMast/fetchRecordsByDate/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchTermRecordsByCleanerIDAndRoomID
+  request: recordMast/fetchTermRecordsByCleanerIDAndRoomID/req.vtl
+  response: recordMast/fetchTermRecordsByCleanerIDAndRoomID/res.vtl
 ##################################################
 # scoreItem
 ##################################################
