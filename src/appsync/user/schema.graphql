@@ -47,7 +47,7 @@ type Query {
     fetchAllRecordsByHotelID(recordHotelID: ID!): [RecordMast!]!
     fetchRecordByRecordID(recordID: ID!): RecordMast
     fetchRecordsByDate(recordHotelID: ID!, recordDate: String!): [RecordMast!]!
-    fetchTermRecordsByCleanerIDAndRoomID(cleanerID: ID!, cleaningRoomID: ID!, from: Int!, to: Int!): [RecordMast!]!
+    fetchTermRecordsByCleanerIDAndRoomID(cleanerID: ID!, cleaningRoomID: ID!, from: String!, to: String!): [RecordMast!]!
     ########################################
     # scoreItem
     ########################################

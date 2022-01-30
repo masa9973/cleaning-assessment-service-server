@@ -52,7 +52,7 @@ type Query {
   fetchScoreItemsByHotelID(scoreItemHotelID: ID!): [ScoreItemMast!]!
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchScoresByScoreItemID(scoreItemID: ID!): [ScoreMast!]!
-  fetchTermRecordsByCleanerIDAndRoomID(cleanerID: ID!, cleaningRoomID: ID!, from: Int!, to: Int!): [RecordMast!]!
+  fetchTermRecordsByCleanerIDAndRoomID(cleanerID: ID!, cleaningRoomID: ID!, from: String!, to: String!): [RecordMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }
 

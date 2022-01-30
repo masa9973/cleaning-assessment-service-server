@@ -1,7 +1,7 @@
 {
     "version": "2018-05-29",
     "operation": "Query",
-    "index": "CleanerIDAndCleaningRoomIDIndex",
+    "index": "CleanerIDAndCleaningRoomID-index",
     "query": {
         "expression": "#PK = :PK and #SK between :from and :to",
         "expressionNames": {
@@ -10,8 +10,8 @@
         },
         "expressionValues": {
             ":PK": $util.dynamodb.toDynamoDBJson("${ctx.args.cleanerID}#${ctx.args.cleaningRoomID}"),
-            ":from": $util.dynamodb.toDynamoDBJson(${ctx.args.from}),
-            ":to": $util.dynamodb.toDynamoDBJson(${ctx.args.to})
+            ":from": $util.dynamodb.toDynamoDBJson("${ctx.args.from}"),
+            ":to": $util.dynamodb.toDynamoDBJson("${ctx.args.to}")
         }
     },
 }

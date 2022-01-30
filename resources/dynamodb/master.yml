@@ -19,7 +19,7 @@ Resources:
                 - AttributeName: CleanerIDAndRoomIDKey
                   AttributeType: S
                 - AttributeName: TimeKey
-                  AttributeType: N
+                  AttributeType: S
             BillingMode: PROVISIONED
             # ContributorInsightsSpecification:
             GlobalSecondaryIndexes:
@@ -59,12 +59,12 @@ Resources:
                   ProvisionedThroughput:
                       ReadCapacityUnits: 1
                       WriteCapacityUnits: 1
-                - IndexName: CleanerIDAndCleaningRoomIDIndex
+                - IndexName: CleanerIDAndCleaningRoomID-index
                   KeySchema:
                       - AttributeName: CleanerIDAndRoomIDKey
                         KeyType: HASH
                       - AttributeName: TimeKey
-                        KeyType: RANGE 
+                        KeyType: RANGE
                   Projection:
                       ProjectionType: ALL
                   ProvisionedThroughput:

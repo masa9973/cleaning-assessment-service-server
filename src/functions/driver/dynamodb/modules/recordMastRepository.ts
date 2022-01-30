@@ -12,6 +12,8 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 uuid: this.getUUID(input),
                 CleaningRoomID: this.getCleaningRoomID(input),
                 CleanerID: this.getCleanerID(input),
+                CleanerIDAndRoomIDKey: this.getCleanerIDAndRoomIDKey(input),
+                TimeKey: this.getTimeKey(input),
                 ...input,
             },
             ConditionExpression: 'attribute_not_exists(#PK) AND attribute_not_exists(#SK)',
@@ -31,6 +33,8 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 uuid: this.getUUID(input),
                 CleaningRoomID: this.getCleaningRoomID(input),
                 CleanerID: this.getCleanerID(input),
+                CleanerIDAndRoomIDKey: this.getCleanerIDAndRoomIDKey(input),
+                TimeKey: this.getTimeKey(input),
                 ...input,
             },
             ConditionExpression: 'attribute_exists(#PK) AND attribute_exists(#SK)',
@@ -64,7 +68,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             },
             ExpressionAttributeValues: {
                 ':PK': `Record#${recordHotelID}`,
-                ':SK': recordDate
+                ':SK': recordDate,
             },
         });
     }
@@ -75,10 +79,10 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             IndexName: 'CleanerID-index',
             KeyConditionExpression: '#CleanerID = :CleanerID',
             ExpressionAttributeNames: {
-                '#CleanerID': 'CleanerID' // GSIの作成時に指定したキー名を設定
+                '#CleanerID': 'CleanerID', // GSIの作成時に指定したキー名を設定
             },
             ExpressionAttributeValues: {
-                ':CleanerID': cleanerID
+                ':CleanerID': cleanerID,
             },
         });
     }
@@ -88,31 +92,31 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             TableName: this.tableName,
             IndexName: 'CleaningRoomID-index',
             KeyConditionExpression: '#CleaningRoomID = :CleaningRoomID',
-            ExpressionAttributeNames : {
-                '#CleaningRoomID' : 'CleaningRoomID' // GSIの作成時に指定したキー名を設定
+            ExpressionAttributeNames: {
+                '#CleaningRoomID': 'CleaningRoomID', // GSIの作成時に指定したキー名を設定
             },
             ExpressionAttributeValues: {
-                ':CleaningRoomID': cleaningRoomID
+                ':CleaningRoomID': cleaningRoomID,
             },
         });
     }
 
-    public fetchTermRecordsByCleanerIDAndRoomID(cleanerID: string, cleaningRoomID: string, from: number, to: number): Promise<RecordMast[]> {
+    public fetchTermRecordsByCleanerIDAndRoomID(cleanerID: string, cleaningRoomID: string, from: string, to: string): Promise<RecordMast[]> {
         return this.query({
             TableName: this.tableName,
-            IndexName: 'CleanerIDAndCleaningRoomIDIndex',
+            IndexName: 'CleanerIDAndCleaningRoomID-index',
             // #つけてる方がキーの名称、:の方に具体的な値が入るイメージ
             KeyConditionExpression: '#PK = :PK and #SK between :from and :to',
-            ExpressionAttributeNames : {
+            ExpressionAttributeNames: {
                 // キーの名前の設定
-                '#PK' : 'CleanerIDAndRoomIDKey', // 指定したキー名を設定
-                '#SK' : 'TimeKey',
+                '#PK': 'CleanerIDAndRoomIDKey', // 指定したキー名を設定
+                '#SK': 'TimeKey',
             },
             ExpressionAttributeValues: {
                 // キーの値の設定
-                ':PK' : `${cleanerID}#${cleaningRoomID}`,
-                ':from': from,
-                ':to' : to,
+                ':PK': `${cleanerID}#${cleaningRoomID}`,
+                ':from': `${from}`,
+                ':to': `${to}`,
             },
         });
     }
@@ -130,34 +134,34 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
             },
         });
         if (res.length) {
-            return res[0]
+            return res[0];
         } else {
-            return null
+            return null;
         }
     }
 
     // ================================================
     // keys
     // ================================================
-    protected getPK(input: RecordMast):string {
+    protected getPK(input: RecordMast): string {
         return `Record#${input.recordHotelID}`;
     }
-    protected getSK(input: RecordMast):string {
+    protected getSK(input: RecordMast): string {
         return `${input.recordDate}#${input.cleaningRoomID}`;
     }
-    protected getUUID(input: RecordMast):string {
+    protected getUUID(input: RecordMast): string {
         return `${input.recordID}`;
     }
-    protected getCleaningRoomID(input: RecordMast):string {
-        return `${input.cleaningRoomID}`
+    protected getCleaningRoomID(input: RecordMast): string {
+        return `${input.cleaningRoomID}`;
     }
-    protected getCleanerID(input: RecordMast):string {
-        return `${input.cleanerID}`
+    protected getCleanerID(input: RecordMast): string {
+        return `${input.cleanerID}`;
     }
     protected getCleanerIDAndRoomIDKey(input: RecordMast): string {
-        return `${input.cleanerID}#${input.cleaningRoomID}`
+        return `${input.cleanerID}#${input.cleaningRoomID}`;
     }
-    protected getTimeKey(input: RecordMast): number {
-        return input.createdAt
+    protected getTimeKey(input: RecordMast): string {
+        return `${input.createdAt}`;
     }
 }
