@@ -63,7 +63,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
                 '#SK': 'SK',
             },
             ExpressionAttributeValues: {
-                ':PK': `Record${recordHotelID}`,
+                ':PK': `Record#${recordHotelID}`,
                 ':SK': recordDate
             },
         });
@@ -97,6 +97,26 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
+    public fetchTermRecordsByCleanerIDAndRoomID(cleanerID: string, cleaningRoomID: string, from: number, to: number): Promise<RecordMast[]> {
+        return this.query({
+            TableName: this.tableName,
+            IndexName: 'CleanerIDAndCleaningRoomIDIndex',
+            // #つけてる方がキーの名称、:の方に具体的な値が入るイメージ
+            KeyConditionExpression: '#PK = :PK and #SK between :from and :to',
+            ExpressionAttributeNames : {
+                // キーの名前の設定
+                '#PK' : 'CleanerIDAndRoomIDKey', // 指定したキー名を設定
+                '#SK' : 'TimeKey',
+            },
+            ExpressionAttributeValues: {
+                // キーの値の設定
+                ':PK' : `${cleanerID}#${cleaningRoomID}`,
+                ':from': from,
+                ':to' : to,
+            },
+        });
+    }
+
     public async fetchRecordByRecordID(recordID: string): Promise<RecordMast | null> {
         const res = await this.query({
             TableName: this.tableName,
@@ -123,7 +143,7 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         return `Record#${input.recordHotelID}`;
     }
     protected getSK(input: RecordMast):string {
-        return `${input.createdAt}#${input.cleaningRoomID}`;
+        return `${input.recordDate}#${input.cleaningRoomID}`;
     }
     protected getUUID(input: RecordMast):string {
         return `${input.recordID}`;
@@ -133,5 +153,11 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
     }
     protected getCleanerID(input: RecordMast):string {
         return `${input.cleanerID}`
+    }
+    protected getCleanerIDAndRoomIDKey(input: RecordMast): string {
+        return `${input.cleanerID}#${input.cleaningRoomID}`
+    }
+    protected getTimeKey(input: RecordMast): number {
+        return input.createdAt
     }
 }

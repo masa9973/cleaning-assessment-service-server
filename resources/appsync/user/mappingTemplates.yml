@@ -53,7 +53,7 @@
   response: recordMast/fetchRecordByRecordID/res.vtl
 - dataSource: masterTable
   type: Query
-  field: fetchRecordByDate
+  field: fetchRecordsByDate
   request: recordMast/fetchRecordsByDate/req.vtl
   response: recordMast/fetchRecordsByDate/res.vtl
 ##################################################

@@ -16,6 +16,10 @@ Resources:
                   AttributeType: S
                 - AttributeName: ScoreItemID
                   AttributeType: S
+                - AttributeName: CleanerIDAndRoomIDKey
+                  AttributeType: S
+                - AttributeName: TimeKey
+                  AttributeType: N
             BillingMode: PROVISIONED
             # ContributorInsightsSpecification:
             GlobalSecondaryIndexes:
@@ -50,6 +54,17 @@ Resources:
                   KeySchema:
                       - AttributeName: ScoreItemID
                         KeyType: HASH
+                  Projection:
+                      ProjectionType: ALL
+                  ProvisionedThroughput:
+                      ReadCapacityUnits: 1
+                      WriteCapacityUnits: 1
+                - IndexName: CleanerIDAndCleaningRoomIDIndex
+                  KeySchema:
+                      - AttributeName: CleanerIDAndRoomIDKey
+                        KeyType: HASH
+                      - AttributeName: TimeKey
+                        KeyType: RANGE 
                   Projection:
                       ProjectionType: ALL
                   ProvisionedThroughput:
