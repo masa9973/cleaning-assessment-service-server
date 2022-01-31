@@ -1,0 +1,17 @@
+{
+    "version": "2018-05-29",
+    "operation": "Query",
+    "index": "ScoreCleanerIDAndScoreRoomID-index",
+    "query": {
+        "expression": "#PK = :PK and #SK between :from and :to",
+        "expressionNames": {
+            "#PK": "ScoreCleanerIDAndScoreRoomID",
+            "#SK": "ScoreTimeKey"
+        },
+        "expressionValues": {
+            ":PK": $util.dynamodb.toDynamoDBJson("${ctx.args.scoreCleanerID}#${ctx.args.scoreRoomID}"),
+            ":from": $util.dynamodb.toDynamoDBJson("${ctx.args.from}"),
+            ":to": $util.dynamodb.toDynamoDBJson("${ctx.args.to}")
+        }
+    },
+}

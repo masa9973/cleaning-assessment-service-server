@@ -130,6 +130,11 @@
   field: fetchScoresByScoreItemID
   request: scoreMast/fetchScoresByScoreItemID/req.vtl
   response: scoreMast/fetchScoresByScoreItemID/res.vtl
+- dataSource: masterTable
+  type: Query
+  field: fetchTermScoresByCleanerIDAndRoomID
+  request: scoreMast/fetchTermScoresByCleanerIDAndRoomID/req.vtl
+  response: scoreMast/fetchTermScoresByCleanerIDAndRoomID/res.vtl
 ##################################################
 # user
 ##################################################

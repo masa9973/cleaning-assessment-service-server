@@ -63,6 +63,8 @@ type Query {
     ########################################
     fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
     fetchScoresByScoreItemID(scoreItemID: ID!): [ScoreMast!]!
+    fetchTermScoresByCleanerIDAndRoomID(scoreCleanerID: ID!, scoreRoomID: ID!, from: String!, to: String!): [ScoreMast!]!
+
     ########################################
     # user
     ########################################

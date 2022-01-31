@@ -53,6 +53,7 @@ type Query {
   fetchScoresByRecordID(recordID: ID!): [ScoreMast!]!
   fetchScoresByScoreItemID(scoreItemID: ID!): [ScoreMast!]!
   fetchTermRecordsByCleanerIDAndRoomID(cleanerID: ID!, cleaningRoomID: ID!, from: String!, to: String!): [RecordMast!]!
+  fetchTermScoresByCleanerIDAndRoomID(from: String!, scoreCleanerID: ID!, scoreRoomID: ID!, to: String!): [ScoreMast!]!
   fetchUserMastByUserID(userID: ID!): UserMast
 }
 
@@ -135,8 +136,10 @@ type ScoreMast {
   createdAt: AWSTimestamp!
   recordID: ID!
   score: Int!
+  scoreCleanerID: ID!
   scoreID: ID!
   scoreItemID: ID!
+  scoreRoomID: ID!
   scorerUserID: ID!
 }
 
@@ -144,8 +147,10 @@ input ScoreMastInput {
   createdAt: AWSTimestamp!
   recordID: ID!
   score: Int!
+  scoreCleanerID: ID!
   scoreID: ID!
   scoreItemID: ID!
+  scoreRoomID: ID!
   scorerUserID: ID!
 }
 
