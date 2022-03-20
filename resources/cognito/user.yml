@@ -5,7 +5,7 @@
 ###############################################################
 Resources:
     # User pool
-    cleaning-assessment-serviceUserPool:
+    CleaningAssessmentServiceUserPool:
         Type: 'AWS::Cognito::UserPool'
         # DeletionPolicy: Retain # <= 本番ではこれ設定しないと死にます
         Properties:
@@ -43,7 +43,7 @@ Resources:
             UserPoolTags:
                 Name: ${self:provider.stage}
     # App Client
-    cleaning-assessment-serviceUserPoolClient:
+    CleaningAssessmentServiceUserPoolClient:
         Type: 'AWS::Cognito::UserPoolClient'
         Properties:
             ClientName: ${self:custom.env.infra.${self:provider.stage}.COGNITO_USER_USER_POOL_CLIENT_NAME}
@@ -53,11 +53,11 @@ Resources:
             ReadAttributes:
                 - 'email'
             RefreshTokenValidity: 30
-            UserPoolId: { Ref: cleaning-assessment-serviceUserPool }
+            UserPoolId: { Ref: CleaningAssessmentServiceUserPool }
             WriteAttributes:
                 - 'email'
     # The federated identity for our user pool to auth with
-    cleaning-assessment-serviceUserIdentityPool:
+    CleaningAssessmentServiceUserIdentityPool:
         Type: AWS::Cognito::IdentityPool
         Properties:
             # Generate a name based on the stage
@@ -67,6 +67,6 @@ Resources:
             # Link to our User Pool
             CognitoIdentityProviders:
                 - ClientId:
-                      Ref: cleaning-assessment-serviceUserPoolClient
+                      Ref: CleaningAssessmentServiceUserPoolClient
                   ProviderName:
-                      Fn::GetAtt: ['cleaning-assessment-serviceUserPool', 'ProviderName']
+                      Fn::GetAtt: ['CleaningAssessmentServiceUserPool', 'ProviderName']

@@ -26,8 +26,8 @@ Resources:
                                 - 'dynamodb:Query'
                                 - 'dynamodb:GetItem'
                             Resource:
-                                - { Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }
-                                - Fn::Join: ['', [{ Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }, '/*']]
+                                - { Fn::GetAtt: CleaningAssessmentServiceMasterTable.Arn }
+                                - Fn::Join: ['', [{ Fn::GetAtt: CleaningAssessmentServiceMasterTable.Arn }, '/*']]
     ## Lambdaの実行権限
     UserAppSyncLambdaRole:
         Type: 'AWS::IAM::Role'

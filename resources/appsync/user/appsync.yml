@@ -4,7 +4,7 @@ authenticationType: AMAZON_COGNITO_USER_POOLS
 userPoolConfig:
     awsRegion: ${self:provider.region} # defaults to provider region
     defaultAction: ALLOW # required # ALLOW or DENY
-    userPoolId: { Ref: cleaning-assessment-serviceUserPool } # required # user pool ID
+    userPoolId: { Ref: CleaningAssessmentServiceUserPool } # required # user pool ID
 additionalAuthenticationProviders:
     - authenticationType: API_KEY
 logConfig:
