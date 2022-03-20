@@ -1,4 +1,4 @@
-# stage3-server
+# cleaning-assessment-service-server
 ## 清掃評価サービスのサーバー部分
 ### 役割
 インフラ（resource）とアプリケーションロジック
