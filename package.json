@@ -1,5 +1,5 @@
 {
-  "name": "stage3-server",
+  "name": "cleaning-assessment-service-server",
   "version": "1.0.0",
   "description": "landg academy server",
   "main": "index.js",
@@ -8,7 +8,7 @@
   "dependencies": {
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1037.0",
-    "stage3-abr": "git+ssh://git@github.com:masa9973/stage3-abr.git#dev"
+    "cleaning-assessment-service-abr": "git+ssh://git@github.com:masa9973/cleaning-assessment-service-abr.git#dev"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.1.0",
@@ -27,7 +27,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
-    "abr": "sh node_modules/stage3-abr/pull.sh",
+    "abr": "sh node_modules/cleaning-assessment-service-abr/pull.sh",
     "codegen": "graphql-codegen --config codegen.yml",
     "deploy": "sh cleanSchema.sh"
   }

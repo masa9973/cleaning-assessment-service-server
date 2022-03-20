@@ -47,8 +47,8 @@ Resources:
                                 - 'dynamodb:Scan'
                                 - 'dynamodb:UpdateItem'
                             Resource:
-                                - { Fn::GetAtt: Stage3MasterTable.Arn }
-                                - Fn::Join: ['', [{ Fn::GetAtt: Stage3MasterTable.Arn }, '/*']]
+                                - { Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }
+                                - Fn::Join: ['', [{ Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }, '/*']]
                 - ## ログの設定
                   PolicyName: ${self:custom.env.infra.${self:provider.stage}.LAMBDA_USER_CONTROLLER_POLICY_NAME_LOG}
                   PolicyDocument:

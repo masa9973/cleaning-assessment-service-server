@@ -1,5 +1,5 @@
-import { IS3Repository } from 'stage3-abr';
-import { S3Object } from 'stage3-abr/dist/entities/type';
+import { IS3Repository } from 'cleaning-assessment-service-abr';
+import { S3Object } from 'cleaning-assessment-service-abr/dist/entities/type';
 
 export class S3Repository implements IS3Repository {
     fetchObject<T>(s3Object: S3Object): Promise<T> {

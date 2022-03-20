@@ -3,7 +3,7 @@
   name: masterTable
   description: 'マスターデータのテーブル'
   config:
-      tableName: { Ref: Stage3MasterTable }
+      tableName: { Ref: cleaning-assessment-serviceMasterTable }
       serviceRoleArn: { Fn::GetAtt: [UserAppSyncDynamoRole, Arn] }
       region: ${self:provider.region}
 # Academyのマスターテーブル

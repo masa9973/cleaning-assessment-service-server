@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-    - './node_modules/stage3-abr/dist/schema.graphql'
+    - './node_modules/cleaning-assessment-service-abr/dist/schema.graphql'
 documents: null
 config:
     namingConvention: keep

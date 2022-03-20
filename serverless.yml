@@ -1,4 +1,4 @@
-service: stage3-server
+service: cleaning-assessment-service-server
 variablesResolutionMode: 20210326
 
 provider:

@@ -1,6 +1,6 @@
 import { CustomMessageSignUpTriggerEvent } from 'aws-lambda';
 import AWS from 'aws-sdk';
-import { generateUUID, RepositoryContainer } from 'stage3-abr';
+import { generateUUID, RepositoryContainer } from 'cleaning-assessment-service-abr';
 
 const cognito = new AWS.CognitoIdentityServiceProvider({});
 

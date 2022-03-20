@@ -1,7 +1,7 @@
 import { repositoryContainer } from '@/repository';
 import { Handler } from 'aws-lambda';
-import { Scalars } from 'stage3-abr/dist/entities/type';
-import { ChillnnTrainingError, ErrorCode } from 'stage3-abr';
+import { Scalars } from 'cleaning-assessment-service-abr/dist/entities/type';
+import { ChillnnTrainingError, ErrorCode } from 'cleaning-assessment-service-abr';
 
 type UserAction =
     // record

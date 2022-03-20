@@ -1,4 +1,4 @@
-import { RepositoryContainer } from 'stage3-abr';
+import { RepositoryContainer } from 'cleaning-assessment-service-abr';
 import { recordMastRepository } from './modules/recordMastRepository';
 import { s3Repository } from './modules/s3Repository';
 import { userMastRepository } from './modules/userMastRepository';

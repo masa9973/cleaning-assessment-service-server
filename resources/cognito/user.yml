@@ -5,7 +5,7 @@
 ###############################################################
 Resources:
     # User pool
-    Stage3UserPool:
+    cleaning-assessment-serviceUserPool:
         Type: 'AWS::Cognito::UserPool'
         # DeletionPolicy: Retain # <= 本番ではこれ設定しないと死にます
         Properties:
@@ -18,7 +18,7 @@ Resources:
             AutoVerifiedAttributes:
                 - email
             EmailVerificationMessage: verify_code={####}.
-            EmailVerificationSubject: 'Welcome to STAGE3'
+            EmailVerificationSubject: 'Welcome to cleaning-assessment-service'
             LambdaConfig:
                 CustomMessage: 'arn:aws:lambda:${aws:region}:${aws:accountId}:function:${self:custom.env.infra.${self:provider.stage}.LAMBDA_USER_COGNITO_NAME}'
             MfaConfiguration: 'OFF'
@@ -43,7 +43,7 @@ Resources:
             UserPoolTags:
                 Name: ${self:provider.stage}
     # App Client
-    Stage3UserPoolClient:
+    cleaning-assessment-serviceUserPoolClient:
         Type: 'AWS::Cognito::UserPoolClient'
         Properties:
             ClientName: ${self:custom.env.infra.${self:provider.stage}.COGNITO_USER_USER_POOL_CLIENT_NAME}
@@ -53,11 +53,11 @@ Resources:
             ReadAttributes:
                 - 'email'
             RefreshTokenValidity: 30
-            UserPoolId: { Ref: Stage3UserPool }
+            UserPoolId: { Ref: cleaning-assessment-serviceUserPool }
             WriteAttributes:
                 - 'email'
     # The federated identity for our user pool to auth with
-    Stage3UserIdentityPool:
+    cleaning-assessment-serviceUserIdentityPool:
         Type: AWS::Cognito::IdentityPool
         Properties:
             # Generate a name based on the stage
@@ -67,6 +67,6 @@ Resources:
             # Link to our User Pool
             CognitoIdentityProviders:
                 - ClientId:
-                      Ref: Stage3UserPoolClient
+                      Ref: cleaning-assessment-serviceUserPoolClient
                   ProviderName:
-                      Fn::GetAtt: ['Stage3UserPool', 'ProviderName']
+                      Fn::GetAtt: ['cleaning-assessment-serviceUserPool', 'ProviderName']

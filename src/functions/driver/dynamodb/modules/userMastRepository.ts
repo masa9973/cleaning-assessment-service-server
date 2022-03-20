@@ -1,5 +1,5 @@
-import { IUserMastRepository } from 'stage3-abr';
-import { UserMast } from 'stage3-abr/dist/entities/type';
+import { IUserMastRepository } from 'cleaning-assessment-service-abr';
+import { UserMast } from 'cleaning-assessment-service-abr/dist/entities/type';
 import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 
 export class DynamoDBUserMastRepository extends DynamoDBRepositoryBase<UserMast> implements IUserMastRepository {

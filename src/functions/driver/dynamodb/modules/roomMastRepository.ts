@@ -1,4 +1,4 @@
-import { IRoomMastRepository, RoomMast } from 'stage3-abr';
+import { IRoomMastRepository, RoomMast } from 'cleaning-assessment-service-abr';
 import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 
 export class DynamoDBRoomMastRepository extends DynamoDBRepositoryBase<RoomMast> implements IRoomMastRepository {

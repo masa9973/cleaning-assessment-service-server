@@ -1,5 +1,5 @@
-import { IRecordMastRepository } from 'stage3-abr';
-import { RecordMast } from 'stage3-abr/dist/entities/type';
+import { IRecordMastRepository } from 'cleaning-assessment-service-abr';
+import { RecordMast } from 'cleaning-assessment-service-abr/dist/entities/type';
 import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 
 export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordMast> implements IRecordMastRepository {

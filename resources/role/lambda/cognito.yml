@@ -48,8 +48,8 @@ Resources:
                                 - 'dynamodb:UpdateItem'
                             Resource:
                                 # app master
-                                - { Fn::GetAtt: Stage3MasterTable.Arn }
-                                - Fn::Join: ['', [{ Fn::GetAtt: Stage3MasterTable.Arn }, '/*']]
+                                - { Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }
+                                - Fn::Join: ['', [{ Fn::GetAtt: cleaning-assessment-serviceMasterTable.Arn }, '/*']]
                 - ## Cognitoの設定
                   PolicyName: ${self:custom.env.infra.${self:provider.stage}.LAMBDA_USER_COGNITO_POLICY_NAME_CONITO}
                   PolicyDocument:
@@ -60,8 +60,8 @@ Resources:
                                 - 'cognito-idp:AdminDeleteUser' # 削除可能
                             Resource:
                                 # app master
-                                - { Fn::GetAtt: Stage3UserPool.Arn }
-                                - Fn::Join: ['', [{ Fn::GetAtt: Stage3UserPool.Arn }, '/*']]
+                                - { Fn::GetAtt: cleaning-assessment-serviceUserPool.Arn }
+                                - Fn::Join: ['', [{ Fn::GetAtt: cleaning-assessment-serviceUserPool.Arn }, '/*']]
                 - ## ログの設定
                   PolicyName: ${self:custom.env.infra.${self:provider.stage}.LAMBDA_USER_COGNITO_POLICY_NAME_LOG}
                   PolicyDocument:
@@ -80,4 +80,4 @@ Resources:
             Action: lambda:InvokeFunction
             FunctionName: ${self:custom.env.infra.${self:provider.stage}.LAMBDA_USER_COGNITO_NAME}
             Principal: cognito-idp.amazonaws.com
-            SourceArn: { Fn::GetAtt: Stage3UserPool.Arn }
+            SourceArn: { Fn::GetAtt: cleaning-assessment-serviceUserPool.Arn }

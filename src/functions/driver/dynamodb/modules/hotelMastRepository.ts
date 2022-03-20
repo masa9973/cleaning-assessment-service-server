@@ -1,4 +1,4 @@
-import { HotelMast, IHotelMastRepository } from 'stage3-abr';
+import { HotelMast, IHotelMastRepository } from 'cleaning-assessment-service-abr';
 import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 
 export class DynamoDBHotelMastRepository extends DynamoDBRepositoryBase<HotelMast> implements IHotelMastRepository {

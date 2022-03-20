@@ -1,5 +1,5 @@
-import { IScoreMastRepository } from 'stage3-abr';
-import { ScoreMast } from 'stage3-abr/dist/entities/type';
+import { IScoreMastRepository } from 'cleaning-assessment-service-abr';
+import { ScoreMast } from 'cleaning-assessment-service-abr/dist/entities/type';
 import { DynamoDBRepositoryBase } from '../dynamoDBRepositoryBase';
 
 export class DynamoDBScoreMastRepository extends DynamoDBRepositoryBase<ScoreMast> implements IScoreMastRepository {
