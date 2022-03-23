@@ -5,3 +5,6 @@
 
 ### 仕組み
 serverless.ymlに全てをimportする
+
+### 勉強
+filterは非破壊なので、plans.available = plans.available.filter()みたいな感じにしなきゃいけない
