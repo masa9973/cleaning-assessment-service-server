@@ -1,4 +1,4 @@
-service: cleaning-assessment-service-server
+service: cleaning-assessment-server
 variablesResolutionMode: 20210326
 
 provider:

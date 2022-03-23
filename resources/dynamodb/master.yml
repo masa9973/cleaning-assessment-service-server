@@ -1,5 +1,5 @@
 Resources:
-    CleaningAssessmentServiceMasterTable:
+    CleaningAssessmentMasterTable:
         Type: 'AWS::DynamoDB::Table'
         # DeletionPolicy: Retain # <= 本番ではこれ設定しないと死にます
         Properties:

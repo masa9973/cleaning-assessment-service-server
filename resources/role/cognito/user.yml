@@ -21,7 +21,7 @@ Resources:
                       Condition:
                           StringEquals:
                               cognito-identity.amazonaws.com:aud:
-                                  Ref: CleaningAssessmentServiceUserIdentityPool
+                                  Ref: CleaningAssessmentUserIdentityPool
                           ForAnyValue:StringLike:
                               'cognito-identity.amazonaws.com:amr': authenticated
             Policies:
@@ -60,7 +60,7 @@ Resources:
                       Condition:
                           StringEquals:
                               cognito-identity.amazonaws.com:aud:
-                                  Ref: CleaningAssessmentServiceUserIdentityPool
+                                  Ref: CleaningAssessmentUserIdentityPool
                           ForAnyValue:StringLike:
                               'cognito-identity.amazonaws.com:amr': unauthenticated
             Policies:
@@ -85,7 +85,7 @@ Resources:
         Type: AWS::Cognito::IdentityPoolRoleAttachment
         Properties:
             IdentityPoolId:
-                Ref: CleaningAssessmentServiceUserIdentityPool
+                Ref: CleaningAssessmentUserIdentityPool
             Roles:
                 authenticated:
                     Fn::GetAtt: [UserCognitoAuthRole, Arn]
