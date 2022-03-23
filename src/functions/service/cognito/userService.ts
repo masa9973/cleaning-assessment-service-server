@@ -37,7 +37,7 @@ export class UserCognitoService {
         }
 
         const codeParameter: string = input.request.codeParameter || '{####}';
-        input.response.emailSubject = `【新規登録】ようこそCHILLSTAGRAMへ`;
+        input.response.emailSubject = `【新規登録】認証コードをお送りします`;
         input.response.emailMessage = `認証コード = ${codeParameter}`;
         return input;
     }
