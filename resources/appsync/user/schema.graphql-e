@@ -12,6 +12,9 @@ enum ErrorCode {
   chillnnTraining_401_notSignIn
   chillnnTraining_404_resourceNotFound
   chillnnTraining_500_systemError
+  chillnnTraining_code_mismatch
+  chillnnTraining_email_already_exists
+  chillnnTraining_user_not_confirmed
 }
 
 type HotelMast {
