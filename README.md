@@ -10,4 +10,10 @@ serverless.ymlに全てをimportする
 filterは非破壊なので、plans.available = plans.available.filter()みたいな感じにしなきゃいけない
 
 ### serverのdeploy
-schemaが変更されるとserverのdeployが必要, apiのschemaが変わるから
+schemaが変更されるとserverのdeployが必要,<br>apiのschemaが変わるから
+
+### serverlessについて
+＝サーバーの管理が不要<br>
+VPC内で管理→OpenSearch, Elasticache(Redis)はgatewayを通じて<br>
+serverlessな奴ら(outbound free)とコミュニケーションとる<br>
+serverのinternalとexternalの違いは、このVPCの中にあるか外にあるか
