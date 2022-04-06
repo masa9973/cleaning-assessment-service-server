@@ -10,7 +10,10 @@ serverless.ymlに全てをimportする
 filterは非破壊なので、plans.available = plans.available.filter()みたいな感じにしなきゃいけない
 
 ### serverのdeploy
-schemaが変更されるとserverのdeployが必要,<br>apiのschemaが変わるから
+schemaが変更されるとserverのdeployが必要,<br>
+apiのschemaが変わるから<br>
+serverのschema変えるの忘れがちなので気をつけよう
+
 
 ### serverlessについて
 ＝サーバーの管理が不要<br>
