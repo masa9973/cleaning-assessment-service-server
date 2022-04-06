@@ -22,3 +22,6 @@ serverのinternalとexternalの違いは、このVPCの中にあるか外にあ�
 const promises: Promise<any>[] = [...Plans, ...Plans];<br>
 await Promise.all(promises);<br>
 みたいな。パフォーマンスが良くなる
+  
+###　serverのschema
+変更するの忘れがちなので気を付ける
