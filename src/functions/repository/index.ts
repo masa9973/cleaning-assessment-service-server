@@ -9,12 +9,12 @@ import { scoreItemMastRepository } from './modules/scoreItemMastRepository';
 
 export const repositoryContainer = new RepositoryContainer(
     // infra
+    hotelMastRepository,
     s3Repository,
     // resources
     userMastRepository,
     recordMastRepository,
     scoreMastRepository,
-    hotelMastRepository,
     roomMastRepository,
     scoreItemMastRepository
 );

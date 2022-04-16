@@ -72,17 +72,17 @@ export const handler: Handler = async (
             case 'AddScoreItem':
                 response = await repositoryContainer.scoreItemMastRepository.addScoreItem(event.input)
                 break;
-            case 'DeleteScoreItem':
-                response = await repositoryContainer.scoreItemMastRepository.deleteScoreItem(event.input)
-                break;
+            // case 'DeleteScoreItem':
+            //     response = await repositoryContainer.scoreItemMastRepository.deleteScoreItem(event.input)
+            //     break;
             // ==================================================
             // Room
             // ==================================================
             case 'AddRoom':
                 response = await repositoryContainer.roomMastRepository.addRoom(event.input);
                 break;
-            case 'DeleteRoom':
-                response = await repositoryContainer.roomMastRepository.deleteRoom(event.input)
+        //     case 'DeleteRoom':
+        //         response = await repositoryContainer.roomMastRepository.deleteRoom(event.input)
         }
     } catch (err) {
         console.error(err);
