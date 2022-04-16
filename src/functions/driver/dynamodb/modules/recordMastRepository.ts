@@ -73,32 +73,51 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
-    public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
-        return this.query({
-            TableName: this.tableName,
-            IndexName: 'CleanerID-index',
-            KeyConditionExpression: '#CleanerID = :CleanerID',
-            ExpressionAttributeNames: {
-                '#CleanerID': 'CleanerID', // GSIの作成時に指定したキー名を設定
-            },
-            ExpressionAttributeValues: {
-                ':CleanerID': cleanerID,
-            },
-        });
-    }
+    // public fetchRecordsByCleanerID(cleanerID: string): Promise<RecordMast[]> {
+    //     return this.query({
+    //         TableName: this.tableName,
+    //         IndexName: 'CleanerID-index',
+    //         KeyConditionExpression: '#CleanerID = :CleanerID',
+    //         ExpressionAttributeNames: {
+    //             '#CleanerID': 'CleanerID', // GSIの作成時に指定したキー名を設定
+    //         },
+    //         ExpressionAttributeValues: {
+    //             ':CleanerID': cleanerID,
+    //         },
+    //     });
+    // }
 
-    public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
-        return this.query({
+    // public fetchRecordsByRoomID(cleaningRoomID: string): Promise<RecordMast[]> {
+    //     return this.query({
+    //         TableName: this.tableName,
+    //         IndexName: 'CleaningRoomID-index',
+    //         KeyConditionExpression: '#CleaningRoomID = :CleaningRoomID',
+    //         ExpressionAttributeNames: {
+    //             '#CleaningRoomID': 'CleaningRoomID', // GSIの作成時に指定したキー名を設定
+    //         },
+    //         ExpressionAttributeValues: {
+    //             ':CleaningRoomID': cleaningRoomID,
+    //         },
+    //     });
+    // }
+
+    public async fetchRecordByRecordID(recordID: string): Promise<RecordMast | null> {
+        const res = await this.query({
             TableName: this.tableName,
-            IndexName: 'CleaningRoomID-index',
-            KeyConditionExpression: '#CleaningRoomID = :CleaningRoomID',
+            IndexName: DynamoDBRepositoryBase.UUIDIndexName,
+            KeyConditionExpression: '#uuid = :uuid',
             ExpressionAttributeNames: {
-                '#CleaningRoomID': 'CleaningRoomID', // GSIの作成時に指定したキー名を設定
+                '#uuid': 'uuid',
             },
             ExpressionAttributeValues: {
-                ':CleaningRoomID': cleaningRoomID,
+                ':uuid': recordID,
             },
         });
+        if (res.length) {
+            return res[0];
+        } else {
+            return null;
+        }
     }
 
     public fetchTermRecordsByCleanerIDAndRoomID(cleanerID: string, cleaningRoomID: string, from: string, to: string): Promise<RecordMast[]> {
@@ -121,24 +140,6 @@ export class DynamoDBRecordMastRepository extends DynamoDBRepositoryBase<RecordM
         });
     }
 
-    public async fetchRecordByRecordID(recordID: string): Promise<RecordMast | null> {
-        const res = await this.query({
-            TableName: this.tableName,
-            IndexName: DynamoDBRepositoryBase.UUIDIndexName,
-            KeyConditionExpression: '#uuid = :uuid',
-            ExpressionAttributeNames: {
-                '#uuid': 'uuid',
-            },
-            ExpressionAttributeValues: {
-                ':uuid': recordID,
-            },
-        });
-        if (res.length) {
-            return res[0];
-        } else {
-            return null;
-        }
-    }
 
     // ================================================
     // keys
