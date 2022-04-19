@@ -24,4 +24,5 @@ serverのinternalとexternalの違いは、このVPCの中にあるか外にあ�
 ### Promise.all
 const promises: Promise<any>[] = [...Plans, ...Plans];<br>
 await Promise.all(promises);<br>
-みたいな。パフォーマンスが良くなる
+みたいな。パフォーマンスが良くなる<br>
+処理時間をT1<T2<T3とすると、T1+T2+T3ではなくT3になる
