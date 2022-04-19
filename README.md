@@ -12,7 +12,8 @@ filterは非破壊なので、plans.available = plans.available.filter()みた�
 ### serverのdeploy
 schemaが変更されるとserverのdeployが必要,<br>
 apiのschemaが変わるから<br>
-serverのschema変えるの忘れがちなので気をつけよう
+serverのschema変えるの忘れがちなので気をつけよう<br>
+codegenしてからプルリク上げるようにする
 
 
 ### serverlessについて
