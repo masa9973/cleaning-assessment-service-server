@@ -12,7 +12,8 @@ filterは非破壊なので、plans.available = plans.available.filter()みた�
 ### serverのdeploy
 schemaが変更されるとserverのdeployが必要,<br>
 apiのschemaが変わるから<br>
-serverのschema変えるの忘れがちなので気をつけよう
+serverのschema変えるの忘れがちなので気をつけよう<br>
+codegenしてからプルリク上げるようにする
 
 
 ### serverlessについて
@@ -24,4 +25,5 @@ serverのinternalとexternalの違いは、このVPCの中にあるか外にあ�
 ### Promise.all
 const promises: Promise<any>[] = [...Plans, ...Plans];<br>
 await Promise.all(promises);<br>
-みたいな。パフォーマンスが良くなる
+みたいな。パフォーマンスが良くなる<br>
+処理時間をT1<T2<T3とすると、T1+T2+T3ではなくT3になる
