@@ -2,11 +2,13 @@ import { repositoryContainer } from '@/repository';
 import { Handler } from 'aws-lambda';
 import { Scalars } from 'cleaning-assessment-service-abr/dist/entities/type';
 import { ChillnnTrainingError, ErrorCode } from 'cleaning-assessment-service-abr';
+import { AddTestRecord } from '@/service/test/addTestRecord';
 
 type UserAction =
     // record
     | 'AddRecord'
     | 'UpdateRecord'
+    | 'AddTestRecord'
     // score
     | 'AddScore'
     | 'UpdateScore'
@@ -40,6 +42,12 @@ export const handler: Handler = async (
                 break;
             case 'UpdateRecord':
                 response = await repositoryContainer.recordMastRepository.updateRecord(event.input);
+                break;
+            case 'AddTestRecord':
+                // テストをインスタンス化
+                response = await repositoryContainer.recordMastRepository.addRecord(event.input)
+                const addTestRecord = new AddTestRecord(response, repositoryContainer.recordMastRepository, repositoryContainer.scoreMastRepository, repositoryContainer.scoreItemMastRepository)
+                await addTestRecord.addTestRecord()
                 break;
             // ==================================================
             // User

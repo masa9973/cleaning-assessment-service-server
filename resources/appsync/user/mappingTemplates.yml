@@ -31,6 +31,11 @@
   field: updateRecord
   request: recordMast/updateRecord/req.vtl
   response: recordMast/updateRecord/res.vtl
+- dataSource: controller
+  type: Mutation
+  field: addTestRecord
+  request: recordMast/addTestRecord/req.vtl
+  response: recordMast/addTestRecord/res.vtl
 - dataSource: masterTable
   type: Query
   field: fetchRecordsByCleanerID
